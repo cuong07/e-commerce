@@ -67,7 +67,7 @@ module.exports = {
         },
         typing: {
           from: "w-0",
-          to: "w-full"
+          to: "w-full",
         },
         blink: {
           "50%": {
@@ -78,14 +78,16 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "typing":
-          "typing 2s steps(22), blink .5s step-end infinite alternate",
+        typing: "typing 2s steps(22), blink .5s step-end infinite alternate",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-login": "linear-gradient(90deg, #1c92d2 0%, #f2fcfe 100%)",
+      },
+      screens: {
+        xl: "1300px",
       },
     },
   },

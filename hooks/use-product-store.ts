@@ -22,7 +22,7 @@ interface ProductStore {
 const useProductStore = create<ProductStore>((set) => ({
   pagination: {
     page: 0,
-    limit: 10,
+    limit: 12,
   },
   productsData: null,
   product: null,

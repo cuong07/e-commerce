@@ -10,7 +10,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         <div>
           <HeaderSearch />
         </div>
-        <div className="hidden md:px-40  justify-between md:flex h-full">
+        <div className="hidden lg:px-40 px-2 justify-between md:flex h-full">
           <div className="my-4">
             <Navigation />
           </div>
