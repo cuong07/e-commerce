@@ -6,3 +6,7 @@ export const userV1 = {
 export const productV1 = {
   GET_PRODUCTS: "/products",
 };
+
+export const categoryV1 = {
+  GET_CATEGORIES: "/categories",
+};

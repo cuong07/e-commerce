@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 export const SidebarItem = (item: any) => {
   return (
@@ -14,13 +15,21 @@ export const SidebarItem = (item: any) => {
         <AccordionTrigger className="hover:no-underline py-2">
           {item.item.name}
         </AccordionTrigger>
-        {item.item.type === "radio" &&
-          item.item.data.map((item: any, index: number) => (
-            <AccordionContent className="flex gap-2">
-              <Checkbox id={`terms${index}`} itemType="radio" />
-              <label htmlFor={`terms${index}`}>{item.name}</label>
-            </AccordionContent>
-          ))}
+        {item.item.type === "radio" && (
+          <AccordionContent>
+            <RadioGroup className="pb-0">
+              {item.item.data.map((item: any, index: number) => (
+                <div className="flex gap-2 items-center">
+                  <RadioGroupItem
+                    id={`terms${index}`}
+                    value={`terms${index}`}
+                  />
+                  <label htmlFor={`terms${index}`}>{item.name}</label>
+                </div>
+              ))}
+            </RadioGroup>
+          </AccordionContent>
+        )}
         {item.item.type === "nomal" && (
           <div className="flex gap-2 pb-2">
             {item.item.data.map((item: any) => (

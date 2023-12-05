@@ -1,11 +1,32 @@
 import { productV1 } from "@/constant/endpoint";
 import { request } from "@/lib/axios";
+import qs from "query-string";
 
-export const getProducts = async (page: number, limit: number) => {
+type QueryString = {
+  page: number;
+  limit: number;
+  keyword?: string;
+  category_id?: number;
+};
+
+export const getProducts = async ({
+  page,
+  limit,
+  keyword,
+  category_id,
+}: QueryString) => {
+  const url = qs.stringifyUrl({
+    url: productV1.GET_PRODUCTS,
+    query: {
+      page,
+      limit,
+      keyword,
+      category_id,
+    },
+  });
   try {
-    const response = await request(
-      `${productV1.GET_PRODUCTS}?page=${page}&size=${limit}`
-    );
+    await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+    const response = await request(url);
     return response;
   } catch (error: any) {
     throw error;
