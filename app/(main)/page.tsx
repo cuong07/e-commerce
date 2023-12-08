@@ -13,7 +13,7 @@ const Page = () => {
       <section>
         <BannerSlide />
       </section>
-      <div className="my-16 z-">
+      <div className="my-16">
         <h2 className="font-bold md:text-5xl text-xl text-center tracking-tight mb-2 break-all ">
           Discover clothing that enhances your lifestyle.
         </h2>

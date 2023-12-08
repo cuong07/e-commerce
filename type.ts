@@ -22,10 +22,22 @@ export type UserRegisterType = {
 };
 
 export type ProductData = {
+  id: number;
   name: string;
   price: number;
   thumbnail: string;
   description: string;
   categori_id: string;
   url: string;
+  product_images: ProductImage[];
+};
+
+export type ProductImage = {
+  id: number;
+  image_url: string;
+};
+
+export type CategoryData = {
+  id: string;
+  name: string;
 };

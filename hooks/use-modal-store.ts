@@ -1,10 +1,12 @@
+import { ProductImage } from "@/type";
 import { create } from "zustand";
 
-export type ModalType = "error";
+export type ModalType = "error" | "image";
 
 interface IModalData {
   message?: string;
   code?: number;
+  productImage?: ProductImage[];
 }
 
 interface IModalStore {

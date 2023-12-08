@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ErrorModal } from "@/components/modals/error-modal";
+import { ImageModal } from "@/components/modals/image-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setItMounted] = useState(false);
@@ -15,6 +16,7 @@ export const ModalProvider = () => {
   }
   return (
     <>
+      <ImageModal />
       <ErrorModal />
     </>
   );

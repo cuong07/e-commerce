@@ -30,7 +30,7 @@ const BannerSlide = () => {
       }}
       modules={[Pagination, Autoplay]}
       onSlideChange={(swiper) => handleSlideChange(swiper)}
-      className="md:h-[800px]"
+      className="md:h-[800px] z-10"
     >
       {banners.map((banner, index) => (
         <SwiperSlide key={banner.titile}>
@@ -46,7 +46,7 @@ const BannerSlide = () => {
             <div
               className={cn(
                 "absolute flex h-full w-[50%] flex-col gap-4 justify-center p-4",
-                banner.pos === "end" && "justify-end w-full items-end",
+                banner.pos === "end" && "justify-end w-full items-end"
               )}
             >
               {activeIndex === index && (

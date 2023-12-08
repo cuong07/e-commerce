@@ -5,6 +5,7 @@ export const userV1 = {
 
 export const productV1 = {
   GET_PRODUCTS: "/products",
+  GET_DETAILS_PRODUCT: "/products/",
 };
 
 export const categoryV1 = {

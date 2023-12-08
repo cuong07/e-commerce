@@ -1,7 +1,9 @@
+"use client";
 import BannerSlide from "@/components/banner/banner-slide";
 import { HeaderSearch } from "@/components/header/header-search";
 import { Navigation } from "@/components/navigation/navigation";
 import { MapPin } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (

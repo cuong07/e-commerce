@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -7,6 +6,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SidebarItem } from "./sidebar-item";
+import { CategoryData } from "@/type";
+import { categoryV1 } from "@/constant/endpoint";
+import qs from "query-string";
+import { request } from "@/lib/axios";
 
 const DUMMY_DATA = [
   {
@@ -37,14 +40,27 @@ const DUMMY_DATA = [
     data: [
       {
         name: "Red",
+        value: "#ff0808",
         id: 1,
       },
       {
-        name: "Red",
+        name: "Blue ",
+        value: "#4a08ff",
         id: 2,
       },
       {
-        name: "Red",
+        name: "Green",
+        value: "#08ff29",
+        id: 3,
+      },
+      {
+        name: "Pink",
+        value: "#ff08ad",
+        id: 3,
+      },
+      {
+        name: "Black",
+        value: "#000000",
         id: 3,
       },
     ],
@@ -55,25 +71,66 @@ const DUMMY_DATA = [
     data: [
       {
         name: "M",
+        value: "",
         id: 1,
       },
       {
         name: "XL",
+        value: "",
         id: 2,
       },
       {
         name: "S",
+        value: "",
         id: 3,
       },
     ],
   },
 ];
+interface QueryString {
+  page?: number;
+  limit?: number;
+}
+
+async function getCategories({ page, limit }: QueryString) {
+  const url = qs.stringifyUrl({
+    url: categoryV1.GET_CATEGORIES,
+    query: {
+      page,
+      limit,
+    },
+  });
+
+  try {
+    const response = await request.get(url);
+    return response.data as CategoryData[];
+  } catch (error: any) {
+    console.log("GET_CATEGORY_ERROR: ", error);
+    throw error;
+  }
+}
 
 export const SidebarFilter = () => {
+  const [categories, setCategories] = useState<CategoryData[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const result = await getCategories({ page: 0, limit: 10 });
+        setCategories(result);
+      } catch (error) {
+        // Handle error
+        console.error(error);
+      }
+    };
+
+    fetchCategories();
+  }, []); // Run only on mount
+
   return (
     <>
       {DUMMY_DATA.map((data, index) => (
-        <SidebarItem item={data} key={index} />
+        <SidebarItem item={data} categories={categories} key={index} />
       ))}
     </>
   );
