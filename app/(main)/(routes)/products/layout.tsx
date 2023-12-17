@@ -1,7 +1,8 @@
 "use client";
 import { SidebarFilter } from "@/components/sidebar/sidebar-filter";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
+import Skeleton from "./(components)/skeleton";
 
 const ProductLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
@@ -17,7 +18,11 @@ const ProductLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="xl:w-[300px] md:w-[180px] h-full lg:block hidden ">
         <SidebarFilter />
       </div>
-      <main className="flex-1">{children}</main>
+      <main className="flex-1">
+        <Suspense fallback={<Skeleton numberElement={12} />}>
+          {children}
+        </Suspense>
+      </main>
     </div>
   );
 };

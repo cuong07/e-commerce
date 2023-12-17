@@ -2,12 +2,36 @@
 import BannerSlide from "@/components/banner/banner-slide";
 import CursorProvider from "@/components/providers/cursor-provider";
 import useAuthStore from "@/hooks/use-auth-store";
-import React from "react";
+import useCartStore from "@/hooks/use-cart-store";
+import { useModalStore } from "@/hooks/use-modal-store";
+import { getCurrentCartByUser } from "@/lib/api/cart";
+import React, { useEffect } from "react";
 
 const Page = () => {
-  const { loginData } = useAuthStore();
-  console.log("Token: ", loginData?.token);
-
+  const { getCart, setFetching } = useCartStore();
+  const { onOpen } = useModalStore();
+  useEffect(() => {
+    (async () => {
+      try {
+        setFetching(true);
+        const response = await getCurrentCartByUser();
+        getCart(response);
+      } catch (error: any) {
+        setFetching(false);
+        if (error.response) {
+          onOpen("error", {
+            message: error.response.data,
+            code: error.response.status,
+          });
+        } else {
+          onOpen("error", {
+            message: error.message,
+            code: error.code,
+          });
+        }
+      }
+    })();
+  }, []);
   return (
     <div className="relative ">
       <section>

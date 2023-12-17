@@ -30,23 +30,23 @@ const BannerSlide = () => {
       }}
       modules={[Pagination, Autoplay]}
       onSlideChange={(swiper) => handleSlideChange(swiper)}
-      className="md:h-[800px] z-10"
+      className="md:h-[800px] "
     >
       {banners.map((banner, index) => (
         <SwiperSlide key={banner.titile}>
-          <div className="relative h-full">
+          <div className="relative h-full ">
             <div className="absolute left-0 top-0">
               <Image
                 src={banner.image}
                 alt={banner.titile}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover "
               />
             </div>
 
             <div
               className={cn(
-                "absolute flex h-full w-[50%] flex-col gap-4 justify-center p-4",
-                banner.pos === "end" && "justify-end w-full items-end"
+                "absolute flex h-full w-[50%] flex-col gap-4 justify-center p-8",
+                banner.pos === "end" && "justify-end w-full items-end",
               )}
             >
               {activeIndex === index && (
@@ -56,7 +56,7 @@ const BannerSlide = () => {
                 />
               )}
               {activeIndex !== index && (
-                <span className="text-3xl font-light text-white">
+                <span className="text-4xl font-light text-white">
                   {banner.titile}
                 </span>
               )}
@@ -72,13 +72,12 @@ const BannerSlide = () => {
                   {banner.description}
                 </span>
               )}
-
               <div className="flex gap-4">
                 {banner.action.map((action) => (
                   <Button
                     key={action.title}
-                    variant="link"
-                    className="bg-zinc-300 dark:bg-zinc-500 dark:hover:bg-zinc-600 transition-all hover:no-underline"
+                    variant="default"
+                    className="  transition-all hover:no-underline text-base p-6 font-thin rounded-none"
                   >
                     <Link href={action.link} className="no-underline">
                       {action.title}

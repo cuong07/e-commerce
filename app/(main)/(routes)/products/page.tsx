@@ -14,20 +14,20 @@ const ProductsPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
   const {
-    getListProduct,
-    getListProductsSearch,
     pagination,
-    nextPage,
     productsData,
     totalPage,
-    setFetching,
     isLoading,
     keyword,
+    getListProductsSearch,
+    nextPage,
+    setFetching,
+    getListProduct,
   } = useProductStore();
   const { onOpen } = useModalStore();
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
         const { page, limit } = pagination;
         const response = await getProducts({ page, limit });
@@ -48,19 +48,17 @@ const ProductsPage = () => {
           });
         }
       }
-    };
-    fetchData();
+    })();
   }, [pagination]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async function () {
       try {
         const response = await getProducts({ page: 0, limit: 20, keyword });
         getListProductsSearch(response?.data);
         setFetching(false);
       } catch (error: any) {
         setFetching(false);
-        console.log("Error fetching products:", error);
         if (error.response) {
           onOpen("error", {
             message: error.response.data,
@@ -73,8 +71,7 @@ const ProductsPage = () => {
           });
         }
       }
-    };
-    fetchData();
+    })();
   }, [keyword]);
 
   const handleClickCard = (id: number) => {

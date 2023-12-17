@@ -68,8 +68,8 @@ export const InputSearch = ({ handleSearch }: IInputSearchProps) => {
   };
 
   return (
-    <div className="h-12 rounded-lg mx-4 w-full z-50 ">
-      <div className="flex items-center space-x-2 w-full mb-1">
+    <div className="h-full rounded-lg mx-4 w-full z-50 relative">
+      <div className="flex items-center space-x-2 w-full  ">
         <Input
           placeholder="Search name product..."
           onChange={handleChange}

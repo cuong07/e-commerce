@@ -1,7 +1,7 @@
 import { getDetailProduct } from "@/lib/api/products";
 import { request } from "@/lib/axios";
 import { ProductData, ProductImage } from "@/type";
-import React from "react";
+import React, { Suspense } from "react";
 import { ProductDetail } from "./(components)/product-detail";
 
 interface ProductDetailPageProps {
@@ -30,7 +30,9 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
 
   return (
     <div className="lg:px-[160px]">
-      <ProductDetail product={product} />
+      <Suspense fallback="Loading......">
+        <ProductDetail product={product} />
+      </Suspense>
     </div>
   );
 };

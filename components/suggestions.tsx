@@ -1,4 +1,5 @@
 import { ProductData } from "@/type";
+import Image from "next/image";
 import React from "react";
 
 interface SuggestionsProps {
@@ -30,22 +31,34 @@ export const Suggestions = ({
   };
   if (results.length === 0) {
     return (
-      <ul className="bg-white text-black p-2 rounded-md shadow-md  mt-2">
+      <ul className="bg-white text-black p-2 rounded-md shadow-md absolute w-full mt-2">
         <li>Enter the product name you want to search</li>
       </ul>
     );
   }
 
   return (
-    <ul className="bg-white text-black p-2 mt-2 rounded-md shadow-md ">
+    <ul className="bg-white text-black p-2 mt-2 rounded-md shadow-md absolute w-full ">
       {results.length > 0 &&
         results.map((product: ProductData) => (
           <li
             key={product.id}
             onClick={() => handleClick(product.id, product.name)}
-            className="cursor-pointer hover:bg-zinc-200 transition-all p-1"
+            className="cursor-pointer hover:bg-zinc-200 transition-all p-1 h-12 flex justify-between rounded-md"
           >
-            {highlightMatch(product.name, keyword)}
+            <div>
+              <div>{highlightMatch(product.name, keyword)}</div>
+              <p className="text-sm font-semibold text-zinc-600">
+                ${product.price}
+              </p>
+            </div>
+            <div className="h-full overflow-hidden w-12 ">
+              <img
+                src={process.env.NEXT_PUBLIC_BASE_URL + product.thumbnail}
+                alt={product.name}
+                className="object-cover hover:scale-110 scale-105 transition-all"
+              />
+            </div>
           </li>
         ))}
     </ul>

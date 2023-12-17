@@ -119,19 +119,20 @@ export const SidebarFilter = () => {
         const result = await getCategories({ page: 0, limit: 10 });
         setCategories(result);
       } catch (error) {
-        // Handle error
         console.error(error);
       }
     };
-
     fetchCategories();
-  }, []); // Run only on mount
+  }, []);
 
   return (
-    <>
-      {DUMMY_DATA.map((data, index) => (
-        <SidebarItem item={data} categories={categories} key={index} />
-      ))}
-    </>
+    <div>
+      <h2 className="font-semibold text-xl px-2">Fillter</h2>
+      <div>
+        {DUMMY_DATA.map((data, index) => (
+          <SidebarItem item={data} categories={categories} key={index} />
+        ))}
+      </div>
+    </div>
   );
 };

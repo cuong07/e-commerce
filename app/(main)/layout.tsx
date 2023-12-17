@@ -1,19 +1,16 @@
 "use client";
-import BannerSlide from "@/components/banner/banner-slide";
+import { FooterMain } from "@/components/footer/footer-main";
 import { HeaderSearch } from "@/components/header/header-search";
 import { Navigation } from "@/components/navigation/navigation";
 import { MapPin } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full">
-      <div>
-        <div>
-          <HeaderSearch />
-        </div>
-        <div className="hidden lg:px-40 px-2 justify-between md:flex h-full">
-          <div className="my-4">
+      <HeaderSearch />
+      <main className="mt-[89px]">
+        <div className="hidden lg:px-40 px-2 justify-between md:flex h-full ">
+          <div className="my-4 ">
             <Navigation />
           </div>
           <div className="flex gap-6 items-center">
@@ -24,8 +21,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
             <div>Track your order</div>
           </div>
         </div>
-      </div>
-      <main>{children}</main>
+        <div>{children}</div>
+      </main>
+      <FooterMain />
     </div>
   );
 };

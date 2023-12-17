@@ -27,7 +27,7 @@ export type ProductData = {
   price: number;
   thumbnail: string;
   description: string;
-  categori_id: string;
+  category_id: number;
   url: string;
   product_images: ProductImage[];
 };
@@ -40,4 +40,22 @@ export type ProductImage = {
 export type CategoryData = {
   id: string;
   name: string;
+};
+
+export type CartDetailsData = {
+  id: number;
+  cart_id: number;
+  product: ProductData;
+  number_of_products: number;
+  price: number;
+  total_money: number;
+  color: string;
+};
+
+export type CartData = {
+  id: number;
+  user_id: number;
+  note: string;
+  cart_details: CartDetailsData[];
+  is_active: boolean;
 };

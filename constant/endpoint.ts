@@ -11,3 +11,7 @@ export const productV1 = {
 export const categoryV1 = {
   GET_CATEGORIES: "/categories",
 };
+
+export const CartV1 = {
+  GET_CART_BY_USER: "/carts",
+};

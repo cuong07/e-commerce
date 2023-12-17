@@ -21,13 +21,13 @@ export const getProducts = async ({
       page,
       limit,
       keyword,
-      category_id,
+      category_id: category_id,
     },
   });
   console.log(url);
 
   try {
-    await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+    // await new Promise((resolve, reject) => setTimeout(resolve, 2000));
     const response = await request(url);
     return response;
   } catch (error: any) {
@@ -40,6 +40,7 @@ export const getDetailProduct = async (productId: string) => {
     url: `${productV1.GET_DETAILS_PRODUCT}${productId}`,
   });
   try {
+    // await new Promise((resolve, reject) => setTimeout(resolve, 2000));
     const response = await request(url);
     return response;
   } catch (error: any) {

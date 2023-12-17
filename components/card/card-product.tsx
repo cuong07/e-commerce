@@ -30,7 +30,7 @@ export const CardProduct = ({ product }: { product: ProductData }) => {
           </p>
         </div>
         <div className="flex justify-between w-full items-center">
-          <p className="">${product.price}</p>
+          <p className="font-bold">${product.price}</p>
           <Button variant="outline">Add to cart</Button>
         </div>
       </CardFooter>
