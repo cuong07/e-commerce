@@ -68,9 +68,11 @@ export const Navigation = () => {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            <div className="p-0">Products</div>
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px]">
+            <ul className="grid gap-3 md:p-4 p-0 md:w-[400px]">
               {products.map((product) => (
                 <NavigationItem
                   key={product.title}

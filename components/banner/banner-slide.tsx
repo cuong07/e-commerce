@@ -30,7 +30,7 @@ const BannerSlide = () => {
       }}
       modules={[Pagination, Autoplay]}
       onSlideChange={(swiper) => handleSlideChange(swiper)}
-      className="md:h-[800px] "
+      className="md:h-[800px] min-h-[200px] "
     >
       {banners.map((banner, index) => (
         <SwiperSlide key={banner.titile}>
@@ -45,30 +45,30 @@ const BannerSlide = () => {
 
             <div
               className={cn(
-                "absolute flex h-full w-[50%] flex-col gap-4 justify-center p-8",
+                "absolute md:flex h-full w-full  flex-col gap-4 justify-center hidden md:p-8 p-2",
                 banner.pos === "end" && "justify-end w-full items-end",
               )}
             >
               {activeIndex === index && (
                 <TextTyping
-                  className="text-3xl font-light text-white"
+                  className="md:text-3xl font-light text-white"
                   text={banner.titile}
                 />
               )}
               {activeIndex !== index && (
-                <span className="text-4xl font-light text-white">
+                <span className="md:text-4xl font-light text-white">
                   {banner.titile}
                 </span>
               )}
 
               {activeIndex === index && (
                 <TextTyping
-                  className="text-base text-white font-extralight "
+                  className="md:text-base text-white font-extralight "
                   text={banner.description}
                 />
               )}
               {activeIndex !== index && (
-                <span className="text-base text-white font-extralight ">
+                <span className="md:text-base text-white font-extralight ">
                   {banner.description}
                 </span>
               )}
@@ -77,7 +77,7 @@ const BannerSlide = () => {
                   <Button
                     key={action.title}
                     variant="default"
-                    className="  transition-all hover:no-underline text-base p-6 font-thin rounded-none"
+                    className="transition-all hover:no-underline md:text-base md:p-6 font-thin rounded-none"
                   >
                     <Link href={action.link} className="no-underline">
                       {action.title}

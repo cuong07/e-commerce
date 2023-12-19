@@ -46,7 +46,7 @@ export type CartDetailsData = {
   id: number;
   cart_id: number;
   product: ProductData;
-  number_of_products: number;
+  product_of_number: number;
   price: number;
   total_money: number;
   color: string;

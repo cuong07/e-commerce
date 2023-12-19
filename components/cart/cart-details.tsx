@@ -22,26 +22,26 @@ export type CartData = {
   product: ProductData;
 };
 
-const DUMMY_CART: CartData[] = [
-  {
-    color: "Blue",
-    number_of_product: 2,
-    total_money: 660,
-    product: {
-      thumbnail: "",
-      name: "LG Front Loading D3V Washing Machine",
-    },
-  },
-  {
-    color: "Blue",
-    number_of_product: 2,
-    total_money: 660,
-    product: {
-      thumbnail: "",
-      name: "LG Front Loading D3V Washing Machine",
-    },
-  },
-];
+// const DUMMY_CART: CartData[] = [
+//   {
+//     color: "Blue",
+//     number_of_product: 2,
+//     total_money: 660,
+//     product: {
+//       thumbnail: "",
+//       name: "LG Front Loading D3V Washing Machine",
+//     },
+//   },
+//   {
+//     color: "Blue",
+//     number_of_product: 2,
+//     total_money: 660,
+//     product: {
+//       thumbnail: "",
+//       name: "LG Front Loading D3V Washing Machine",
+//     },
+//   },
+// ];
 
 const CartDetails = () => {
   return (
@@ -59,7 +59,7 @@ const CartDetails = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {DUMMY_CART.map((cart: CartData) => (
+                {/* {DUMMY_CART.map((cart: CartData) => (
                   <TableRow key={cart.total_money}>
                     <TableCell className="flex gap-3">
                       <Image
@@ -76,7 +76,7 @@ const CartDetails = () => {
                     <TableCell>{cart.number_of_product}</TableCell>
                     <TableCell>{cart.total_money}</TableCell>
                   </TableRow>
-                ))}
+                ))} */}
               </TableBody>
             </Table>
           </div>

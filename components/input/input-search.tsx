@@ -79,7 +79,7 @@ export const InputSearch = ({ handleSearch }: IInputSearchProps) => {
         />
         <Button className="flex gap-2" onClick={handleSumit}>
           <Search size={20} className="" />
-          Search
+          <span className="md:block hidden">Search</span>
         </Button>
       </div>
       {isOpenPopup && (

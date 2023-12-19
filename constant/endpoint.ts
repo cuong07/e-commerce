@@ -15,3 +15,7 @@ export const categoryV1 = {
 export const CartV1 = {
   GET_CART_BY_USER: "/carts",
 };
+
+export const CartDetailV1 = {
+  UPDATE_CART_DETAIL: "/cart_details/",
+};

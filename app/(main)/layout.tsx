@@ -9,11 +9,11 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="h-full">
       <HeaderSearch />
       <main className="mt-[89px]">
-        <div className="hidden lg:px-40 px-2 justify-between md:flex h-full ">
+        <div className=" lg:px-40 px-2 justify-between md:flex h-full ">
           <div className="my-4 ">
             <Navigation />
           </div>
-          <div className="flex gap-6 items-center">
+          <div className="md:flex hidden gap-6 items-center">
             <div className="flex gap-2 items-center">
               <MapPin size={16} className="dark:text-zinc-300 text-zinc-500" />
               <p>Store Location</p>

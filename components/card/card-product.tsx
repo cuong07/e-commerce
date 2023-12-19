@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { Suspense } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "../ui/button";
+import { formatCurency } from "@/lib/utils";
 
 export const CardProduct = ({ product }: { product: ProductData }) => {
   // const noImage = "http://sacus.vn/wp-content/uploads/2019/06/no-image.jpg";
@@ -30,7 +31,7 @@ export const CardProduct = ({ product }: { product: ProductData }) => {
           </p>
         </div>
         <div className="flex justify-between w-full items-center">
-          <p className="font-bold">${product.price}</p>
+          <p className="font-bold">{formatCurency(product.price)}</p>
           <Button variant="outline">Add to cart</Button>
         </div>
       </CardFooter>

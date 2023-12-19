@@ -16,6 +16,7 @@ import notFound from "@/assets/notfound.jpg";
 import { getProducts } from "@/lib/api/products";
 import { CardProduct } from "@/components/card/card-product";
 import { useRouter } from "next/navigation";
+import { formatCurency } from "@/lib/utils";
 
 export const ProductDetail = ({ product }: { product: ProductData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
@@ -141,12 +142,14 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                 40%
               </span>
               <span className="line-through text-zinc-600 italic">
-                ${(product.price / (1 - 0.4)).toFixed(2)}
+                {formatCurency(
+                  parseInt((product.price / (1 - 0.4)).toFixed(2)),
+                )}
               </span>
             </div>
             <div className="flex gap-4">
               <div className="font-bold text-4xl tracking-tight">
-                ${product.price}
+                {formatCurency(product.price)}
               </div>
               <div className="">
                 <span className="font-medium text-base">4.8 (102 reviews)</span>
@@ -198,11 +201,11 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
               </Button>
             </div>
           </div>
-          <article>
+          <article className="">
             {product.description} Ipsum dolor sit amet consectetur adipisicing
-            elit. Dignissimos quos illo quam vitae, et vel ipsum. Voluptatibus
-            reiciendis similique impedit, fugit culpa iste optio deleniti.
-            Blanditiis animi enim officia recusandae?
+            elit. Dignissimos quos illo quam vitae, et vel ipsum. <br />
+            Voluptatibus reiciendis similique impedit, fugit culpa iste optio
+            deleniti. Blanditiis animi enim officia recusandae?
           </article>
         </section>
       </div>
