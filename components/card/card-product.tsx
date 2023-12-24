@@ -8,6 +8,8 @@ import useCartStore from '@/hooks/use-cart-store';
 import { createCartDetail } from '@/lib/api/cart';
 import { useToast } from '@/hooks/use-toast';
 import { CheckCheck, ShoppingCartIcon } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel';
+import useContextStore from '@/hooks/use-context-store';
 
 export const CardProduct = ({
     product,
@@ -18,6 +20,7 @@ export const CardProduct = ({
 }) => {
     const { cart, setCartDetail } = useCartStore();
     const { toast } = useToast();
+    const { contextImgageUrl } = useContextStore();
 
     const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
@@ -36,7 +39,7 @@ export const CardProduct = ({
                 toast({
                     description: (
                         <span className="flex">
-                            Successfully <CheckCheck />{' '}
+                            Successfully <CheckCheck />
                         </span>
                     ),
                     variant: 'success',
@@ -46,22 +49,34 @@ export const CardProduct = ({
     };
 
     return (
-        <Card
-            className="flex flex-col h-[320px] rounded-md overflow-hidden cursor-pointer"
-            onClick={(e) => handleClick(e, product.id)}
-        >
-            <CardContent className="p-0 h-[70%] overflow-hidden">
-                <div className="relative h-full w-full">
-                    <Image
-                        src={product.url}
-                        alt={product.name}
-                        layout="fill" // Fill the container
-                        objectFit="cover" // Maintain aspect ratio and cover container
-                        className="object-cover hover:scale-110 scale-105 transition-all"
-                    />
-                </div>
+        <Card className="flex flex-col h-[320px] rounded-md  cursor-pointer">
+            <CardContent className="p-0 h-[70%] relative group ">
+                <Carousel className="h-full w-full overflow-hidden ">
+                    <CarouselContent>
+                        {product?.product_images.map((image) => (
+                            <CarouselItem key={image.id}>
+                                <Card>
+                                    <CardContent className="flex aspect-square items-center justify-center p-6 relative">
+                                        <Image
+                                            src={contextImgageUrl + image.image_url}
+                                            alt={product.name}
+                                            fill
+                                            sizes="100vw"
+                                            className="object-cover hover:scale-110 scale-105 transition-all"
+                                        />
+                                    </CardContent>
+                                </Card>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="z-50 group-hover:flex hidden transition-opacity" />
+                    <CarouselNext className="z-50 group-hover:flex hidden transition-opacity" />
+                </Carousel>
             </CardContent>
-            <CardFooter className="p-2 flex justify-between flex-1  flex-col items-start">
+            <CardFooter
+                className="p-2 flex justify-between flex-1  flex-col items-start"
+                onClick={(e) => handleClick(e, product.id)}
+            >
                 <div className="flex flex-col">
                     <h2 className="font-medium text-base hover:underline">{product.name}</h2>
                     <p className="text-sm font-extralight">{product.description.substring(20)}</p>

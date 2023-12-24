@@ -1,30 +1,31 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import useProductStore from '@/hooks/use-product-store';
-import Skeleton from './(components)/skeleton';
+
+import React, { useEffect } from 'react';
+import Skeleton from '../../(components)/skeleton';
 import { CardProduct } from '@/components/card/card-product';
-import { ProductData } from '@/type';
 import { getProducts } from '@/lib/api/products';
 import { useModalStore } from '@/hooks/use-modal-store';
+import useProductStore from '@/hooks/use-product-store';
+import { ProductData } from '@/type';
 import { LoadMore } from '@/components/load-more';
 import ScrollTop from '@/components/scroll-top';
 import { useRouter } from 'next/navigation';
 
-const ProductsPage = () => {
+const SearchPage = () => {
     const router = useRouter();
-    const { pagination, productsData, totalPage, isLoading, nextPage, setFetching, getListProduct } = useProductStore();
+    const { productsData, totalPage, isLoading, keyword, getListProductsSearch, nextPage, setFetching } =
+        useProductStore();
+
     const { onOpen } = useModalStore();
 
     useEffect(() => {
-        (async () => {
+        (async function () {
             try {
-                const { page, limit } = pagination;
-                const response = await getProducts({ page, limit });
-                getListProduct(response?.data);
+                const response = await getProducts({ page: 0, limit: 48, keyword });
+                getListProductsSearch(response?.data);
                 setFetching(false);
             } catch (error: any) {
                 setFetching(false);
-                console.log('Error fetching products:', error);
                 if (error.response) {
                     onOpen('error', {
                         message: error.response.data,
@@ -39,7 +40,7 @@ const ProductsPage = () => {
             }
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pagination]);
+    }, [keyword]);
 
     const handleClickCard = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
         e.preventDefault();
@@ -70,4 +71,4 @@ const ProductsPage = () => {
     );
 };
 
-export default ProductsPage;
+export default SearchPage;

@@ -44,11 +44,13 @@ export const Suggestions = ({ handleClick, results, keyword }: SuggestionsProps)
                             <div>{highlightMatch(product.name, keyword)}</div>
                             <p className="text-sm font-semibold text-zinc-600">${product.price}</p>
                         </div>
-                        <div className="h-full overflow-hidden w-12 ">
+                        <div className="h-full overflow-hidden w-12 relative">
                             <Image
                                 src={process.env.NEXT_PUBLIC_BASE_URL + product.thumbnail}
                                 alt={product.name}
                                 className="object-cover hover:scale-110 scale-105 transition-all"
+                                fill
+                                sizes="100vw"
                             />
                         </div>
                     </li>

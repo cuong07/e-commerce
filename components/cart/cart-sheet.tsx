@@ -21,13 +21,15 @@ import { Badge } from '../ui/badge';
 import { deleteCartDetailById, updateQuantityCartDetail } from '@/lib/api/cart';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useRouter } from 'next/navigation';
 
 export const CartSheet = () => {
     const { contextImgageUrl } = useContextStore();
-    const { cartDetails, setCartDetail, deleteCartDetail } = useCartStore();
+    const { cartDetails, setCartDetail, deleteCartDetail, totalMoney } = useCartStore();
+    const router = useRouter();
     const { toast } = useToast();
 
-    const totalMoney = cartDetails.map((item) => item.total_money).reduce((a, b) => a + b, 0);
+    // const totalMoney = cartDetails.map((item) => item.total_money).reduce((a, b) => a + b, 0);
 
     const updateCartDetail = async (id: number, quantity: number) => {
         try {
@@ -59,6 +61,10 @@ export const CartSheet = () => {
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const handleClickCheckout = () => {
+        router.push(`/carts/checkout?step=${1}`);
     };
 
     return (
@@ -135,6 +141,7 @@ export const CartSheet = () => {
                             <Button
                                 variant="primary"
                                 className="py-6  min-h-[40px] px-2 flex gap-4 rounded-none w-full text-[16px] font-medium"
+                                onClick={handleClickCheckout}
                             >
                                 Go to checkout!
                             </Button>

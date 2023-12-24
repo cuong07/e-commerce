@@ -42,8 +42,14 @@ export const ImageModal = () => {
                     {productImage &&
                         productImage?.length > 0 &&
                         productImage.map((image: ProductImage) => (
-                            <SwiperSlide key={image.id}>
-                                <Image src={image.image_url} alt={image.image_url} className="object-cover w-full" />
+                            <SwiperSlide key={image.id} className="relative">
+                                <Image
+                                    src={image.image_url}
+                                    alt={image.image_url}
+                                    className="object-cover w-full"
+                                    fill
+                                    sizes="100vw"
+                                />
                             </SwiperSlide>
                         ))}
                 </Swiper>

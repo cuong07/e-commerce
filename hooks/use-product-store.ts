@@ -85,7 +85,8 @@ const useProductStore = create<ProductStore>((set) => ({
                     ...product,
                     url: process.env.NEXT_PUBLIC_BASE_URL + product.thumbnail,
                 }));
-                updatedProductsData = [...(state.productsData || []), ...newProducts];
+                // updatedProductsData = [...(state.productsData || []), ...newProducts];
+                updatedProductsData = [...newProducts];
             }
 
             return {

@@ -16,7 +16,7 @@ export const HeaderSearch = () => {
     const handleSearch = (keyword: string) => {
         getKeyword(keyword);
         console.log(keyword);
-        router.push('/products');
+        router.push(`/products/search?name=${keyword}`);
     };
 
     const handleClickCart = () => {

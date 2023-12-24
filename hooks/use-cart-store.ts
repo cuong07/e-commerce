@@ -4,6 +4,7 @@ import { create } from 'zustand';
 interface CartStore {
     cartDetails: CartDetailsData[];
     cart: CartData | null;
+    totalMoney: number;
     getCart: (data: CartData) => void;
     setFetching: (data: boolean) => void;
     setCartDetail: (data: CartDetailsData) => void;
@@ -14,6 +15,7 @@ const useCartStore = create<CartStore>((set) => ({
     cart: null,
     cartDetails: [],
     isFetching: true,
+    totalMoney: parseFloat(localStorage.getItem('totalCart') || '0'),
 
     getCart: (data) =>
         set((state: CartStore) => ({
@@ -26,8 +28,6 @@ const useCartStore = create<CartStore>((set) => ({
 
     setCartDetail: (data) =>
         set((state: CartStore) => {
-            console.log('Before Update:', state.cartDetails);
-
             // Create a new array with the updated item or added new item
             const updatedCartDetails = state.cartDetails.map((item) =>
                 item.id === data.id ? { ...item, ...data } : item,
@@ -38,14 +38,25 @@ const useCartStore = create<CartStore>((set) => ({
                 updatedCartDetails.push(data);
             }
 
-            console.log('After Update:', updatedCartDetails);
-            return { ...state, cartDetails: updatedCartDetails };
+            const totalCart = updatedCartDetails.reduce((total, product: CartDetailsData) => {
+                const productCost = product.price * product.number_of_product;
+                return total + productCost;
+            }, 0);
+
+            localStorage.setItem('totalCart', JSON.stringify(totalCart));
+
+            return { ...state, cartDetails: updatedCartDetails, totalMoney: totalCart };
         }),
 
     deleteCartDetail: (id) =>
         set((state: CartStore) => {
             const updatedCartDetails = state.cartDetails.filter((item) => item.id !== id);
-            return { ...state, cartDetails: updatedCartDetails };
+            const totalCart = updatedCartDetails.reduce((total, product: CartDetailsData) => {
+                const productCost = product.price * product.number_of_product;
+                return total + productCost;
+            }, 0);
+            localStorage.setItem('totalCart', JSON.stringify(totalCart));
+            return { ...state, cartDetails: updatedCartDetails, totalMoney: totalCart };
         }),
 }));
 

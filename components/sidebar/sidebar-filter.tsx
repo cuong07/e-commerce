@@ -5,6 +5,7 @@ import { CategoryData } from '@/type';
 import { categoryV1 } from '@/constant/endpoint';
 import qs from 'query-string';
 import { request } from '@/lib/axios';
+import { useEffectOneCall } from '@/hooks/useEffectOneCall';
 
 const DUMMY_DATA = [
     {
@@ -108,7 +109,7 @@ async function getCategories({ page, limit }: QueryString) {
 export const SidebarFilter = () => {
     const [categories, setCategories] = useState<CategoryData[]>([]);
 
-    useEffect(() => {
+    useEffectOneCall(() => {
         const fetchCategories = async () => {
             try {
                 const result = await getCategories({ page: 0, limit: 10 });
@@ -118,7 +119,7 @@ export const SidebarFilter = () => {
             }
         };
         fetchCategories();
-    }, []);
+    });
 
     return (
         <div>
