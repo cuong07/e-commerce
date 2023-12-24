@@ -78,7 +78,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
             {product.product_images.length > 0 &&
               product.product_images.map((image: ProductImage) => (
                 <SwiperSlide key={image.id} onClick={handleOpenImageModal}>
-                  <img
+                  <Image
                     src={image.image_url}
                     alt={product.name}
                     className="object-cover w-full"
@@ -108,7 +108,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
             {product.product_images.length > 0 &&
               product.product_images.map((image: ProductImage) => (
                 <SwiperSlide key={image.id}>
-                  <img
+                  <Image
                     src={image.image_url}
                     alt={product.name}
                     className="object-cover w-full h-full"

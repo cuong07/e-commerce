@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { ErrorModal } from "@/components/modals/error-modal";
-import { ImageModal } from "@/components/modals/image-modal";
+import { useEffect, useState } from 'react';
+import { ErrorModal } from '@/components/modals/error-modal';
+import { ImageModal } from '@/components/modals/image-modal';
 
 export const ModalProvider = () => {
-  const [isMounted, setItMounted] = useState(false);
+    const [isMounted, setItMounted] = useState(false);
 
-  useEffect(() => {
-    setItMounted(true);
-  }, []);
+    useEffect(() => {
+        setItMounted(true);
+    }, []);
 
-  if (!isMounted) {
-    return null;
-  }
-  return (
-    <>
-      <ImageModal />
-      <ErrorModal />
-    </>
-  );
+    if (!isMounted) {
+        return null;
+    }
+    return (
+        <>
+            <ImageModal />
+            <ErrorModal />
+        </>
+    );
 };

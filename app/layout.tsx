@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ModalProvider } from "@/components/providers/modal-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const open_sans = Open_Sans({
   weight: "variable",
@@ -31,6 +32,7 @@ export default function RootLayout({
           storageKey="client-theme"
         >
           <ModalProvider />
+          <Toaster />
           {children}
         </ThemeProvider>
       </body>

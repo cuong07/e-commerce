@@ -49,6 +49,7 @@ const ProductsPage = () => {
         }
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
   useEffect(() => {
@@ -72,9 +73,11 @@ const ProductsPage = () => {
         }
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
 
-  const handleClickCard = (id: number) => {
+  const handleClickCard = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
+    e.preventDefault();
     router.push("/products/" + id);
   };
 
@@ -85,9 +88,11 @@ const ProductsPage = () => {
         <div>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
             {productsData?.map((product: ProductData, index: number) => (
-              <div onClick={() => handleClickCard(product.id)} key={index}>
-                <CardProduct product={product} key={index} />
-              </div>
+              <CardProduct
+                product={product}
+                handleClick={handleClickCard}
+                key={index}
+              />
             ))}
           </div>
           {totalPage > 1 && (

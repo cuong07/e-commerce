@@ -23,7 +23,7 @@ const schema = z.object({
     .string()
     .refine(
       (value) => /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(value),
-      "Phone number is not valid"
+      "Phone number is not valid",
     ),
   password: z.string().min(8),
 });
@@ -65,7 +65,7 @@ const Page = () => {
             Welcome To CShop
           </h2>
           <article className="text-center font-thin">
-            Pioneering the modern shopping experience"
+            Pioneering the modern shopping experience
           </article>
           <Image src={loginImageSrc} alt="Login image" />
         </div>

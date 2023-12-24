@@ -1,10 +1,10 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 interface ContextStore {
-  contextImgageUrl: string;
+    contextImgageUrl: string;
 }
 
 const useContextStore = create<ContextStore>((set) => ({
-  contextImgageUrl: process.env.NEXT_PUBLIC_BASE_URL + "",
+    contextImgageUrl: process.env.NEXT_PUBLIC_BASE_URL + '',
 }));
 
 export default useContextStore;

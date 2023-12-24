@@ -37,17 +37,17 @@ const schema = z.object({
     .string()
     .refine(
       (value) => /^[a-zA-Z]+[-'s]?[a-zA-Z ]+$/.test(value),
-      "Name should contain only alphabets"
+      "Name should contain only alphabets",
     )
     .refine(
       (value) => /^[a-zA-Z]+\s+[a-zA-Z]+$/.test(value),
-      "Please enter both firstname and lastname"
+      "Please enter both firstname and lastname",
     ),
   phone_number: z
     .string()
     .refine(
       (value) => /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(value),
-      "Phone number is not valid"
+      "Phone number is not valid",
     ),
   password: z.string().min(8),
   retype_password: z.string().min(8),
@@ -79,7 +79,7 @@ const Page = () => {
       address: "",
       facebook_account_id: 0,
       google_account_id: 0,
-      date_of_birth: (new Date()),
+      date_of_birth: new Date(),
       phone_number: "",
     },
     resolver: zodResolver(schema),
@@ -103,7 +103,7 @@ const Page = () => {
             Welcome To CShop
           </h2>
           <article className="text-center font-thin">
-            "Pioneering the modern shopping experience"
+            Pioneering the modern shopping experience
           </article>
           <Image src={signupImageSrc} alt="Login image" />
         </div>
