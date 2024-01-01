@@ -3,9 +3,9 @@ import React from 'react';
 const Skeleton = () => {
     return (
         <div className=" flex flex-col gap-8 container">
-            <div className="flex md:gap-8 gap-2">
+            <div className="flex md:gap-8 gap-2 md:flex-row flex-col">
                 <section className="flex flex-col gap-4 md:w-[36vw]  md:min-w-[36vw]">
-                    <div className="mt-2 w-full h-[600px] animate-pulse rounded-lg bg-gray-300" />
+                    <div className="mt-2 w-full md:h-[600px] h-[400px] animate-pulse rounded-lg bg-gray-300" />
                     <ul className="flex justify-between gap-2 h-[100px]">
                         {new Array(4).fill(0).map((_, index) => (
                             <li key={index} className="w-1/4 rounded-md bg-gray-300 animate-pulse h-full" />

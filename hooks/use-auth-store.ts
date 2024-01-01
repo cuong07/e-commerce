@@ -1,3 +1,4 @@
+import { UserData } from '@/type';
 import { create } from 'zustand';
 
 type loginResponse = {
@@ -15,9 +16,11 @@ type RegisterResponse = {
 interface IAuthStore {
     loginData: loginResponse | null;
     registerData: RegisterResponse;
+    currentUser: UserData | null;
     err: any;
     login: (data: loginResponse) => void;
     register: (fullName: string, phoneNumber: string, id: number) => void;
+    setCurrentUser: (data: UserData) => void;
     error: (error: any) => void;
 }
 
@@ -33,7 +36,8 @@ const useAuthStore = create<IAuthStore>((set) => ({
         message: '',
     },
     err: null,
-    login: (data: loginResponse) => {
+    currentUser: null,
+    login: (data) => {
         set((state) => ({ ...state, data }));
         if (data.token !== null) {
             localStorage.setItem('token', data.token);
@@ -41,6 +45,7 @@ const useAuthStore = create<IAuthStore>((set) => ({
     },
     register: (fullName, phoneNumber, id) => set((state) => ({ ...state, fullName, phoneNumber, id })),
     error: (err) => set((state) => ({ ...state, err })),
+    setCurrentUser: (data) => set((state) => ({ ...state, currentUser: data })),
 }));
 
 export default useAuthStore;

@@ -1,3 +1,4 @@
+'use client';
 import { CartDetailDTO, ProductData } from '@/type';
 import Image from 'next/image';
 import React from 'react';
@@ -10,6 +11,8 @@ import { useToast } from '@/hooks/use-toast';
 import { CheckCheck, ShoppingCartIcon } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel';
 import useContextStore from '@/hooks/use-context-store';
+import { useAlertStore } from '@/hooks/use-alert-store';
+import useAuthStore from '@/hooks/use-auth-store';
 
 export const CardProduct = ({
     product,
@@ -19,11 +22,22 @@ export const CardProduct = ({
     handleClick: (e: React.MouseEvent<HTMLDivElement>, id: number) => void;
 }) => {
     const { cart, setCartDetail } = useCartStore();
+    const { loginData } = useAuthStore();
     const { toast } = useToast();
     const { contextImgageUrl } = useContextStore();
+    const { onOpen } = useAlertStore();
 
     const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
+        if (!loginData?.token) {
+            onOpen('warning', {
+                link: '/sign-in',
+                message: 'Log in to add to the cart',
+                description:
+                    ' Log in to add to the cart. Enjoy personalized shopping and track your orders seamlessly.',
+            });
+            return;
+        }
         try {
             if (cart) {
                 const newCartDetail: CartDetailDTO = {
@@ -69,8 +83,8 @@ export const CardProduct = ({
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className="z-50 group-hover:flex hidden transition-opacity" />
-                    <CarouselNext className="z-50 group-hover:flex hidden transition-opacity" />
+                    <CarouselPrevious className="z-10 group-hover:flex hidden transition-opacity" />
+                    <CarouselNext className="z-10 group-hover:flex hidden transition-opacity" />
                 </Carousel>
             </CardContent>
             <CardFooter

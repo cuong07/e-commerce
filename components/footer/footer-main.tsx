@@ -4,7 +4,7 @@ import React from 'react';
 export const FooterMain = () => {
     return (
         <>
-            <div className=" md:px-40 p-4 grid md:grid-cols-2  grid-cols-1 bg-zinc-100 py-20 mt-40">
+            <div className=" md:px-40 p-4 grid md:grid-cols-2  grid-cols-1 bg-zinc-100 dark:bg-transparent py-20 mt-40">
                 <div className="">
                     <h2 className="font-bold text-2xl mb-4">CShop</h2>
                     <p className="font-light text-zinc-700 dark:text-zinc-200">

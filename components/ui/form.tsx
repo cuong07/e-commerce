@@ -5,6 +5,7 @@ import { Controller, ControllerProps, FieldPath, FieldValues, FormProvider, useF
 
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
+import { ShieldAlert } from 'lucide-react';
 
 const Form = FormProvider;
 
@@ -123,9 +124,10 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
             <p
                 ref={ref}
                 id={formMessageId}
-                className={cn('text-sm font-medium text-destructive', className)}
+                className={cn('text-sm font-medium text-destructive flex items-center gap-1', className)}
                 {...props}
             >
+                <ShieldAlert size={14} />
                 {body}
             </p>
         );

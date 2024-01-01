@@ -27,7 +27,7 @@ export const InputField: React.FC<IInputField> = ({ control, name, icon, type, l
                 <FormItem>
                     <FormControl>
                         <div className="flex flex-col gap-2">
-                            <FormLabel className="text-sm font-light">{label}</FormLabel>
+                            <FormLabel className="text-sm font-normal">{label}</FormLabel>
                             <div className="flex relative items-center w-full">
                                 <Input
                                     type={type === 'password' ? (isShow === true ? 'text' : 'password') : 'text'}

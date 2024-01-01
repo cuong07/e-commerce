@@ -6,10 +6,13 @@ import useContextStore from '@/hooks/use-context-store';
 import { formatCurency } from '@/lib/utils';
 import { ProductData } from '@/type';
 import { defaults } from 'lodash';
-import { Lock } from 'lucide-react';
+import { Check, Lock, Minus, Plus } from 'lucide-react';
 import Image from 'next/image';
 import Stepper from '../stepper/stepper';
 import { useRouter } from 'next/navigation';
+import { updateQuantityCartDetail } from '@/lib/api/cart';
+import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
 export interface CartDetailsProps {}
 
@@ -24,9 +27,34 @@ const CartDetails = () => {
     const { cartDetails, totalMoney } = useCartStore();
     const { contextImgageUrl } = useContextStore();
     const router = useRouter();
+    const { setCartDetail } = useCartStore();
+    const { toast } = useToast();
 
     const handleClickContinue = () => {
         router.push(`/carts/checkout?step=${2}`);
+    };
+
+    const updateCartDetail = async (id: number, quantity: number) => {
+        try {
+            const response = await updateQuantityCartDetail(id, quantity);
+            setCartDetail(response);
+            toast({
+                variant: 'success',
+                description: (
+                    <div className="flex gap-2 items-center">
+                        <Check />
+                        <span>Updated quantity successfully</span>
+                    </div>
+                ),
+            });
+        } catch (error) {
+            console.log(error);
+            toast({
+                variant: 'destructive',
+                title: 'Updated quantity error',
+                description: Date.now(),
+            });
+        }
     };
 
     return (
@@ -61,12 +89,32 @@ const CartDetails = () => {
                                                 />
                                             </div>
                                         </TableCell>
-                                        <TableCell>{cart.number_of_product}</TableCell>
-                                        <TableCell>{formatCurency(cart.total_money)}</TableCell>
+                                        <TableCell className="">
+                                            <div className="flex gap-2 border-[1px] border-zinc-500 items-center max-w-max p-1 rounded-full">
+                                                <span>
+                                                    <Plus size={20} />
+                                                </span>
+                                                <span> {cart.number_of_product}</span>
+                                                <span>
+                                                    <Minus size={20} />
+                                                </span>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell className="font-semibold">
+                                            {formatCurency(cart.total_money)}
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
+                        {cartDetails.length === 0 && (
+                            <h1 className="text-center w-full text-lg font-semibold my-10">
+                                Cart is empty.{' '}
+                                <Link href="/products" className="hover:underline text-[#6366f1]">
+                                    Go back to shopping!
+                                </Link>
+                            </h1>
+                        )}
                     </div>
                     <div className="md:h-[400px] rounded-[16px] md:p-8 bg-zinc-100/50 shadow-md flex-1  ">
                         <h2>Order Summary</h2>

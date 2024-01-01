@@ -1,28 +1,39 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { StaticImageData } from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Heart, Minus, Plus, ShoppingCart } from 'lucide-react';
+import { CheckCheck, Heart, Minus, Plus, ShoppingCart } from 'lucide-react';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { useModalStore } from '@/hooks/use-modal-store';
 import Breadcrumbs from '@/components/sreadcrumbs';
 import { Button } from '@/components/ui/button';
-import { ProductData, ProductImage } from '@/type';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
-import notFound from '@/assets/notfound.jpg';
+import { CartDetailDTO, ProductData, ProductImage } from '@/type';
+
 import { getProducts } from '@/lib/api/products';
 import { CardProduct } from '@/components/card/card-product';
 import { useRouter } from 'next/navigation';
 import { formatCurency } from '@/lib/utils';
+import { createCartDetail } from '@/lib/api/cart';
+import useAuthStore from '@/hooks/use-auth-store';
+import useCartStore from '@/hooks/use-cart-store';
+import { useToast } from '@/hooks/use-toast';
+import { useAlertStore } from '@/hooks/use-alert-store';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 
 export const ProductDetail = ({ product }: { product: ProductData }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
     const [products, setProducts] = useState<ProductData[]>([]);
     const [quantity, setQuantity] = useState<number>(1);
+    // hooks
+    const alert = useAlertStore();
+    const { cart, setCartDetail } = useCartStore();
+    const { loginData } = useAuthStore();
+    const { toast } = useToast();
     const { onOpen } = useModalStore();
     const router = useRouter();
 
@@ -56,6 +67,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
     const handleIncreaseQuantity = () => {
         setQuantity(quantity + 1);
     };
+
     const handleDecreaseQuantity = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
@@ -67,10 +79,52 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
         router.push('/products/' + id);
     };
 
+    const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        if (!loginData?.token) {
+            alert.onOpen('warning', {
+                link: '/sign-in',
+                message: 'Log in to add to the cart',
+                description:
+                    ' Log in to add to the cart. Enjoy personalized shopping and track your orders seamlessly.',
+            });
+            return;
+        }
+        try {
+            if (cart) {
+                const newCartDetail: CartDetailDTO = {
+                    cart_id: cart?.id,
+                    product_id: product.id,
+                    number_of_product: 1,
+                    price: product.price,
+                    total_money: product.price,
+                    color: '#ffffff',
+                };
+                const response = await createCartDetail(newCartDetail);
+                setCartDetail(response);
+                toast({
+                    description: (
+                        <span className="flex">
+                            Successfully <CheckCheck />
+                        </span>
+                    ),
+                    variant: 'success',
+                });
+            }
+        } catch (error: any) {
+            console.log('GET_PRODUCT_ERROR', error);
+        }
+    };
     return (
-        <div className=" flex flex-col gap-8 container">
-            <div className="flex md:gap-8 gap-2 ">
-                <section className="flex flex-col gap-4 md:w-[36vw]  md:min-w-[36vw]">
+        <div className=" flex flex-col gap-4 container max-md:px-4">
+            <Breadcrumbs
+                items={[
+                    { label: 'Products', path: '/products' },
+                    { label: product.name, path: '' },
+                ]}
+            />
+            <div className="md:gap-8 flex gap-2 flex-col md:flex-row">
+                <section className="flex flex-col gap-4 md:w-[36vw] w-full min-w-0 md:min-w-[36vw]">
                     <Swiper
                         loop={true}
                         spaceBetween={10}
@@ -119,13 +173,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                             ))}
                     </Swiper>
                 </section>
-                <section className="flex gap-8 flex-col">
-                    <Breadcrumbs
-                        items={[
-                            { label: 'Products', path: '/products' },
-                            { label: product.name, path: '' },
-                        ]}
-                    />
+                <section className="flex gap-8 flex-col md:mt-10">
                     <h2 className="font-bold text-5xl tracking-tight">{product.name}</h2>
 
                     <div className="">
@@ -178,6 +226,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                             <Button
                                 variant="outline"
                                 className="flex-1 py-3 bg-[#5a4199] hover:bg-[#5a419990] text-zinc-200 h-14 border rounded-full flex items-center justify-center gap-4 cursor-pointer"
+                                onClick={handleAddToCart}
                             >
                                 <ShoppingCart size={26} />
                                 <span className="font-semibold text-lg">Add to Cart</span>
@@ -192,10 +241,10 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                     </article>
                 </section>
             </div>
-            <hr className="border-t  border-gray-300 my-20" />
+            <hr className="border-t border-gray-300 my-20" />
             <div>
                 <h2 className="font-bold text-3xl mb-20">Good-matching products</h2>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+                <div className="grid grid-cols-2 gap-x-2 gap-y-8 sm:grid-cols-2 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
                     {products?.map((product: ProductData, index: number) => (
                         <div key={index}>
                             <CardProduct product={product} key={index} handleClick={handleClickCard} />

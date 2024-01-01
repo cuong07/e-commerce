@@ -26,7 +26,7 @@ const nextConfig = {
         return config;
     },
     images: {
-        domains: ['localhost', 'utfs.io', 'sacus.vn'],
+        domains: ['localhost', 'utfs.io', 'sacus.vn', 'upload.wikimedia.org', 'inkythuatso.com', 'www.mungbaobao.com'],
     },
 };
 

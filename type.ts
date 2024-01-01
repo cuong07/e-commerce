@@ -70,3 +70,54 @@ export type CartDetailDTO = {
     total_money: number;
     color: string;
 };
+
+export type BaseData = {
+    created_at: number[];
+    updated_at: number[];
+    message: string;
+    status: string;
+};
+
+export type Role = {
+    id: number;
+    name: string;
+};
+
+export type UserAddress = {
+    id: number;
+    address_one: string;
+    address_second: string;
+    city: string;
+    province: string;
+    country: string;
+};
+export type AddressDTO = {
+    address_one: string;
+    address_second: string;
+    city: string;
+    province: string;
+    country: string;
+};
+
+export interface UserData extends BaseData {
+    id: number;
+    full_name: string;
+    phone_number: string;
+    date_of_birth: Date;
+    facebook_account_id: number;
+    google_account_id: number;
+    role: Role;
+    user_addresses: UserAddress[];
+}
+
+export type OrderDTO = {
+    fullname: string;
+    email: string;
+    phone_number: string;
+    note: string;
+    total_money: number;
+    shipping_method: string;
+    shipping_address: string;
+    payment_method: string;
+    address_id: number;
+};
