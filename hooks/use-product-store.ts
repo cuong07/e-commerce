@@ -17,12 +17,16 @@ interface ProductStore {
     productsSearchData: ProductData[] | null;
     totalPage: number;
     keyword: string;
+    price: { minPrice: number; maxPrice: number };
+    categoryId: number;
     nextPage: (count: number) => void;
     getListProduct: (data: ProductsResponse) => void;
     getProduct: (data: ProductData) => void;
     setFetching: (isLoading: boolean) => void;
     getKeyword: (value: string) => void;
+    getCategoryId: (id: number) => void;
     getListProductsSearch: (data: ProductsResponse) => void;
+    getPrice: (data: { minPrice: number; maxPrice: number }) => void;
 }
 
 const useProductStore = create<ProductStore>((set) => ({
@@ -36,7 +40,11 @@ const useProductStore = create<ProductStore>((set) => ({
     totalPage: 0,
     isLoading: true,
     keyword: '',
-
+    price: {
+        minPrice: 0,
+        maxPrice: 999,
+    },
+    categoryId: 0,
     nextPage: (count: number) =>
         set((state: ProductStore) => ({
             ...state,
@@ -101,6 +109,10 @@ const useProductStore = create<ProductStore>((set) => ({
     setFetching: (isLoading: boolean) => set((state: ProductStore) => ({ ...state, isLoading: isLoading })),
 
     getKeyword: (value: string) => set((state: ProductStore) => ({ ...state, keyword: value })),
+
+    getPrice: (value) => set((state: ProductStore) => ({ ...state, price: value })),
+
+    getCategoryId: (id) => set((state: ProductStore) => ({ ...state, categoryId: id })),
 }));
 
 export default useProductStore;

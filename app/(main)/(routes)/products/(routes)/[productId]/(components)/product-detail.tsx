@@ -50,7 +50,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                 const response = await getProducts({
                     limit: 20,
                     page: 0,
-                    category_id: product.category_id,
+                    categoryId: product.category_id,
                 });
                 const result = response.data.products.map((product: ProductData) => ({
                     ...product,

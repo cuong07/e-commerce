@@ -13,15 +13,24 @@ import { useRouter } from 'next/navigation';
 
 const SearchPage = () => {
     const router = useRouter();
-    const { productsData, totalPage, isLoading, keyword, getListProductsSearch, nextPage, setFetching } =
-        useProductStore();
-
+    const {
+        productsData,
+        totalPage,
+        isLoading,
+        keyword,
+        categoryId,
+        getListProductsSearch,
+        nextPage,
+        setFetching,
+        price,
+    } = useProductStore();
     const { onOpen } = useModalStore();
 
     useEffect(() => {
         (async function () {
+            const { maxPrice, minPrice } = price;
             try {
-                const response = await getProducts({ page: 0, limit: 48, keyword });
+                const response = await getProducts({ page: 0, limit: 48, keyword, categoryId, minPrice, maxPrice });
                 getListProductsSearch(response?.data);
                 setFetching(false);
             } catch (error: any) {
@@ -40,7 +49,7 @@ const SearchPage = () => {
             }
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [keyword]);
+    }, [keyword, price, categoryId]);
 
     const handleClickCard = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
         e.preventDefault();

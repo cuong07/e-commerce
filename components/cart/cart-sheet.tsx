@@ -87,7 +87,7 @@ export const CartSheet = () => {
                 <ScrollArea className="flex-1 ">
                     {cartDetails.map(({ product, number_of_product, total_money, id }: CartDetailsData) => (
                         <div
-                            className="mt-4 hover:bg-zinc-100 p-2 -m-2 rounded-md cursor-pointer transition-all px-4"
+                            className="mt-4 hover:bg-zinc-100 dark:hover:bg-zinc-900 p-2 -m-2 rounded-md cursor-pointer transition-all px-4"
                             key={id}
                         >
                             <div className="flex gap-4 space-x-2 justify-between">

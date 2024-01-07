@@ -8,9 +8,11 @@ import { useRouter } from 'next/navigation';
 import { CartSheet } from '@/components/cart/cart-sheet';
 import { MenuUser } from '../menu/menu-user';
 import { Button } from '../ui/button';
+import useAuthStore from '@/hooks/use-auth-store';
 
 export const HeaderSearch = () => {
     const { getKeyword } = useProductStore();
+    const { currentUser } = useAuthStore();
     const router = useRouter();
 
     const handleSearch = (keyword: string) => {

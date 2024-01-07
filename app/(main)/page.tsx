@@ -3,16 +3,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import SplitText from '@/utils/Split3.min';
-
 import BannerSlide from '@/components/banner/banner-slide';
-import CursorProvider from '@/components/providers/cursor-provider';
 import useOnScreen from '@/hooks/use-on-screen';
+import { BannerCategory } from '@/components/banner/banner-category';
+import { getCategories } from '@/lib/api/category';
+import { useEffectOneCall } from '@/hooks/use-effect-one-call';
+import { CategoryData } from '@/type';
 
 const Page = () => {
     const ref = useRef(null);
     const [reveal, setReveal] = useState<boolean>(false);
+    const [categories, setCategories] = useState<CategoryData[]>([]);
 
     const onScreen = useOnScreen(ref);
+
+    useEffectOneCall(() => {
+        (async () => {
+            const response = await getCategories({ page: 0, limit: 6 });
+            setCategories(response.content);
+        })();
+    });
 
     useEffect(() => {
         if (onScreen) setReveal(onScreen);
@@ -50,9 +60,11 @@ const Page = () => {
             </div>
             <section className="my-10 border-b-black border-b font-semibold">
                 <h2 className="md:text-4xl text-xl text-center tracking-tighter mg-2 break-all">Preferred category</h2>
-                <div></div>
+                <div>
+                    <BannerCategory data={categories} />
+                </div>
             </section>
-            <CursorProvider />
+            {/* <CursorProvider /> */}
         </div>
     );
 };

@@ -75,9 +75,11 @@ export const InputSearch = ({ handleSearch }: IInputSearchProps) => {
                     onChange={handleChange}
                     value={keyword}
                     onFocus={handleFoucs}
+                    autoComplete="off"
+                    className="rounded-full focus-visible:ring-0 focus-visible:outline-none"
                     onBlur={handleBlur}
                 />
-                <Button className="flex gap-2" onClick={handleSumit}>
+                <Button className="flex gap-2" variant="default" onClick={handleSumit}>
                     <Search size={20} className="" />
                     <span className="md:block hidden">Search</span>
                 </Button>

@@ -1,24 +1,37 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { CategoryData } from '@/type';
-import { cn } from '@/lib/utils';
+import { Label } from '../ui/label';
 
-export const SidebarItem = ({ item, categories }: { item: any; categories: CategoryData[] }) => {
+export const SidebarItem = ({
+    item,
+    categories,
+    handleChange,
+}: {
+    item: any;
+    categories: CategoryData[];
+    handleChange: (value: string) => void;
+}) => {
+    useEffect(() => {}, []);
+
     return (
-        <Accordion type="multiple" autoFocus className="w-full p-2">
+        <Accordion type="multiple" className="w-full p-2">
             <AccordionItem value="number" className="">
                 <AccordionTrigger className="hover:no-underline py-2">{item.name}</AccordionTrigger>
                 {item.type === 'radio' && (
                     <AccordionContent>
-                        <RadioGroup className="pb-0">
+                        <RadioGroup className="pb-0" onValueChange={handleChange} defaultValue="0">
+                            <Label htmlFor={`0`} className="flex gap-2 items-center">
+                                <RadioGroupItem id={`0`} value={`0`} />
+                                <h2 className="text-base">All</h2>
+                            </Label>
                             {categories?.map((item: any, index: number) => (
-                                <div className="flex gap-2 items-center" key={index}>
-                                    <RadioGroupItem id={`terms${index}`} value={`terms${index}`} />
-                                    <label htmlFor={`terms${index}`}>{item.name}</label>
-                                </div>
+                                <Label htmlFor={`${item.id}`} className="flex gap-2 items-center" key={index}>
+                                    <RadioGroupItem id={`${item.id}`} value={`${item.id}`} />
+                                    <h2 className="text-base">{item.name}</h2>
+                                </Label>
                             ))}
                         </RadioGroup>
                     </AccordionContent>
@@ -28,7 +41,7 @@ export const SidebarItem = ({ item, categories }: { item: any; categories: Categ
                         {item.data.map((item: any) => (
                             <AccordionContent className={``} key={item.id}>
                                 <div
-                                    className="rounded-md py-1 px-3 cursor-pointer transition-all"
+                                    className="rounded-md py-1 px-3 cursor-pointer transition-all text-zinc-400"
                                     style={{ backgroundColor: item.value }}
                                 >
                                     {item.name}

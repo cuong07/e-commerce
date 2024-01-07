@@ -6,17 +6,21 @@ type QueryString = {
     page: number;
     limit: number;
     keyword?: string;
-    category_id?: number;
+    minPrice?: number;
+    maxPrice?: number;
+    categoryId?: number;
 };
 
-export const getProducts = async ({ page, limit, keyword, category_id }: QueryString) => {
+export const getProducts = async ({ page, limit, keyword, categoryId, minPrice, maxPrice }: QueryString) => {
     const url = qs.stringifyUrl({
         url: productV1.GET_PRODUCTS,
         query: {
             page,
             limit,
             keyword,
-            category_id: category_id,
+            min_price: minPrice,
+            max_price: maxPrice,
+            category_id: categoryId,
         },
     });
     try {
@@ -33,7 +37,7 @@ export const getDetailProduct = async (productId: string) => {
         url: `${productV1.GET_DETAILS_PRODUCT}${productId}`,
     });
     try {
-        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+        // await new Promise((resolve, reject) => setTimeout(resolve, 2000));
         const response = await request(url);
         return response;
     } catch (error: any) {

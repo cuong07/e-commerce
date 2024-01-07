@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import useCartStore from '@/hooks/use-cart-store';
 import useContextStore from '@/hooks/use-context-store';
 import { formatCurency } from '@/lib/utils';
-import { ProductData } from '@/type';
+import { ProductData, CartDetailsData } from '@/type';
 import { defaults } from 'lodash';
 import { Check, Lock, Minus, Plus } from 'lucide-react';
 import Image from 'next/image';
@@ -13,15 +13,6 @@ import { useRouter } from 'next/navigation';
 import { updateQuantityCartDetail } from '@/lib/api/cart';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
-
-export interface CartDetailsProps {}
-
-export type CartData = {
-    color: string;
-    number_of_product: number;
-    total_money: number;
-    product: ProductData;
-};
 
 const CartDetails = () => {
     const { cartDetails, totalMoney } = useCartStore();
@@ -72,8 +63,11 @@ const CartDetails = () => {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {cartDetails.map((cart: CartData) => (
-                                    <TableRow key={cart.total_money} className="cursor-pointer hover:bg-zinc-200/50 ">
+                                {cartDetails.map((cart: CartDetailsData) => (
+                                    <TableRow
+                                        key={cart.total_money}
+                                        className="cursor-pointer hover:bg-zinc-200/50  dark:hover:bg-zinc-900"
+                                    >
                                         <TableCell className="flex gap-3">
                                             <Image
                                                 width={60}
@@ -90,12 +84,12 @@ const CartDetails = () => {
                                             </div>
                                         </TableCell>
                                         <TableCell className="">
-                                            <div className="flex gap-2 border-[1px] border-zinc-500 items-center max-w-max p-1 rounded-full">
-                                                <span>
+                                            <div className="flex gap-2 border-[1px] border-zinc-500  items-center max-w-max p-1 rounded-full">
+                                                <span onClick={() => updateCartDetail(cart.id, 1)}>
                                                     <Plus size={20} />
                                                 </span>
                                                 <span> {cart.number_of_product}</span>
-                                                <span>
+                                                <span onClick={() => updateCartDetail(cart.id, -1)}>
                                                     <Minus size={20} />
                                                 </span>
                                             </div>
@@ -116,7 +110,7 @@ const CartDetails = () => {
                             </h1>
                         )}
                     </div>
-                    <div className="md:h-[400px] rounded-[16px] md:p-8 bg-zinc-100/50 shadow-md flex-1  ">
+                    <div className="md:h-[400px] rounded-[16px] md:p-8 bg-zinc-100/50 shadow-md flex-1 dark:bg-zinc-900 ">
                         <h2>Order Summary</h2>
                         <hr className="border-b-2 border-zinc-300/50 my-4" />
                         <div className="flex flex-col gap-4">
@@ -149,7 +143,7 @@ const CartDetails = () => {
                     </div>
                 </div>
             </div>
-            <div>:</div>
+            {/* <div>:</div> */}
         </div>
     );
 };

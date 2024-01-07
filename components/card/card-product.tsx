@@ -8,7 +8,7 @@ import { formatCurency } from '@/lib/utils';
 import useCartStore from '@/hooks/use-cart-store';
 import { createCartDetail } from '@/lib/api/cart';
 import { useToast } from '@/hooks/use-toast';
-import { CheckCheck, ShoppingCartIcon } from 'lucide-react';
+import { CheckCheck, ShoppingCart, ShoppingCartIcon } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel';
 import useContextStore from '@/hooks/use-context-store';
 import { useAlertStore } from '@/hooks/use-alert-store';
@@ -63,7 +63,7 @@ export const CardProduct = ({
     };
 
     return (
-        <Card className="flex flex-col h-[320px] rounded-md  cursor-pointer">
+        <Card className="flex flex-col h-[320px] rounded-lg shadow-sm cursor-pointer">
             <CardContent className="p-0 h-[70%] relative group ">
                 <Carousel className="h-full w-full overflow-hidden ">
                     <CarouselContent>
@@ -96,9 +96,12 @@ export const CardProduct = ({
                     <p className="text-sm font-extralight">{product.description.substring(20)}</p>
                 </div>
                 <div className="flex justify-between w-full items-center">
-                    <p className="font-bold">{formatCurency(product.price)}</p>
+                    <div className="flex gap-2  items-center">
+                        <p className="font-bold text-base">{formatCurency(product.price)}</p>
+                        <p className="text-xs italic line-through">{formatCurency(product.price)}</p>
+                    </div>
                     <Button variant="outline" onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleAddToCart(e)}>
-                        <ShoppingCartIcon />
+                        <ShoppingCart />
                     </Button>
                 </div>
             </CardFooter>
