@@ -67,12 +67,12 @@ export const CardProduct = ({
             <CardContent className="p-0 h-[70%] relative group ">
                 <Carousel className="h-full w-full overflow-hidden ">
                     <CarouselContent>
-                        {product?.product_images.map((image) => (
+                        {product?.productImages.map((image) => (
                             <CarouselItem key={image.id}>
                                 <Card>
                                     <CardContent className="flex aspect-square items-center justify-center p-6 relative">
                                         <Image
-                                            src={contextImgageUrl + image.image_url}
+                                            src={contextImgageUrl + image.imageUrl}
                                             alt={product.name}
                                             fill
                                             sizes="100vw"

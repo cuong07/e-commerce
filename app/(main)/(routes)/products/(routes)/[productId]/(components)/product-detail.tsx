@@ -41,7 +41,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
         'https://st.depositphotos.com/2934765/53192/v/450/depositphotos_531920820-stock-illustration-photo-available-vector-icon-default.jpg';
 
     const handleOpenImageModal = () => {
-        onOpen('image', { productImage: product.product_images });
+        onOpen('image', { productImage: product.productImages });
     };
 
     useEffect(() => {
@@ -50,7 +50,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                 const response = await getProducts({
                     limit: 20,
                     page: 0,
-                    categoryId: product.category_id,
+                    categoryId: product.categoryId,
                 });
                 const result = response.data.products.map((product: ProductData) => ({
                     ...product,
@@ -62,7 +62,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
             }
         };
         fetchData();
-    }, [product.category_id]);
+    }, [product]);
 
     const handleIncreaseQuantity = () => {
         setQuantity(quantity + 1);
@@ -133,13 +133,13 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                         modules={[FreeMode, Navigation, Thumbs]}
                         className="w-full"
                     >
-                        {product.product_images.length > 0 &&
-                            product.product_images.map((image: ProductImage) => (
+                        {product.productImages.length > 0 &&
+                            product.productImages.map((image: ProductImage) => (
                                 <SwiperSlide key={image.id} onClick={handleOpenImageModal}>
-                                    <img src={image.image_url} alt={product.name} className="object-cover w-full" />
+                                    <img src={image.imageUrl} alt={product.name} className="object-cover w-full" />
                                 </SwiperSlide>
                             ))}
-                        {product.product_images.length === 0 && (
+                        {product.productImages.length === 0 && (
                             <SwiperSlide>
                                 <img src={myImage} alt="not found" className="object-cover w-full" />
                             </SwiperSlide>
@@ -155,17 +155,17 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                         modules={[FreeMode, Navigation, Thumbs]}
                         className="w-full"
                     >
-                        {product.product_images.length > 0 &&
-                            product.product_images.map((image: ProductImage) => (
+                        {product.productImages.length > 0 &&
+                            product.productImages.map((image: ProductImage) => (
                                 <SwiperSlide key={image.id}>
                                     <img
-                                        src={image.image_url}
+                                        src={image.imageUrl}
                                         alt={product.name}
                                         className="object-cover w-full h-full"
                                     />
                                 </SwiperSlide>
                             ))}
-                        {product.product_images.length === 0 &&
+                        {product.productImages.length === 0 &&
                             new Array(4).fill(0).map((_, index) => (
                                 <SwiperSlide key={index}>
                                     <img src={myImage} alt="not found" className="object-cover w-full" />

@@ -65,7 +65,7 @@ const CartDetails = () => {
                             <TableBody>
                                 {cartDetails.map((cart: CartDetailsData) => (
                                     <TableRow
-                                        key={cart.total_money}
+                                        key={cart.totalMoney}
                                         className="cursor-pointer hover:bg-zinc-200/50  dark:hover:bg-zinc-900"
                                     >
                                         <TableCell className="flex gap-3">
@@ -88,14 +88,14 @@ const CartDetails = () => {
                                                 <span onClick={() => updateCartDetail(cart.id, 1)}>
                                                     <Plus size={20} />
                                                 </span>
-                                                <span> {cart.number_of_product}</span>
+                                                <span> {cart.numberOfProduct}</span>
                                                 <span onClick={() => updateCartDetail(cart.id, -1)}>
                                                     <Minus size={20} />
                                                 </span>
                                             </div>
                                         </TableCell>
                                         <TableCell className="font-semibold">
-                                            {formatCurency(cart.total_money)}
+                                            {formatCurency(cart.totalMoney)}
                                         </TableCell>
                                     </TableRow>
                                 ))}

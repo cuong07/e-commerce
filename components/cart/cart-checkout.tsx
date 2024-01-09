@@ -76,8 +76,8 @@ const CartCheckout = () => {
     };
 
     useEffect(() => {
-        if (currentUser && currentUser?.user_addresses.length > 0) {
-            setSelectAddress(currentUser.user_addresses[0].id);
+        if (currentUser && currentUser?.userAddresses.length > 0) {
+            setSelectAddress(currentUser.userAddresses[0].id);
         }
     }, [currentUser]);
 
@@ -120,10 +120,10 @@ const CartCheckout = () => {
 
     const handleUpdateAddress = (id: number) => {
         setTypeForm('update');
-        const updateAddress = currentUser?.user_addresses.find((address) => address.id === id);
+        const updateAddress = currentUser?.userAddresses.find((address) => address.id === id);
         if (updateAddress) {
-            form.setValue('address_second', updateAddress.address_second);
-            form.setValue('address_one', updateAddress.address_one);
+            form.setValue('address_second', updateAddress.addressSecond);
+            form.setValue('address_one', updateAddress.addressOne);
             form.setValue('city', updateAddress.city);
             form.setValue('country', updateAddress.country);
             form.setValue('province', updateAddress.province);
@@ -145,6 +145,15 @@ const CartCheckout = () => {
         router.push(`/carts/checkout?step=${3}&address_id=${selectAddress}`);
     };
 
+    const handleChangeTypeForm = () => {
+        setTypeForm('create');
+        form.resetField('address_one');
+        form.resetField('address_second');
+        form.resetField('city');
+        form.resetField('country');
+        form.resetField('province');
+    };
+
     return (
         <div>
             <Stepper step={2} />
@@ -153,7 +162,7 @@ const CartCheckout = () => {
                     <div className="">
                         <h2 className="text-xl font-semibold my-6">Select address</h2>
                         <RadioGroup className="cursor-pointer" onValueChange={handleChangeCheckbox}>
-                            {currentUser?.user_addresses.map((address: UserAddress) => (
+                            {currentUser?.userAddresses.map((address: UserAddress) => (
                                 <div
                                     key={address.id}
                                     className="flex p-4  border rounded-md hover:bg-slate-50 dark:bg-transparent justify-between"
@@ -166,7 +175,7 @@ const CartCheckout = () => {
                                             checked={address.id == selectAddress}
                                         />
                                         <h3 className="cursor-pointer text-base">
-                                            {`${address.address_one}, ${address.province}, ${address.country}`}
+                                            {`${address.addressOne}, ${address.province}, ${address.country}`}
                                         </h3>
                                     </Label>
                                     <div className="cursor-pointer text-base flex gap-2">
@@ -187,7 +196,7 @@ const CartCheckout = () => {
                                     </div>
                                 </div>
                             ))}
-                            {!currentUser?.user_addresses && (
+                            {!currentUser?.userAddresses && (
                                 <h2>You haven`t added any addresses yet. Please add an address.</h2>
                             )}
                         </RadioGroup>
@@ -195,7 +204,9 @@ const CartCheckout = () => {
                     <div className="border-t-[1px] border-zinc-400">
                         <div className="flex justify-between my-6">
                             <h2 className="text-xl font-semibold ">Shipping address</h2>
-                            <Button variant="link">Create new address</Button>
+                            <Button variant="link" onClick={handleChangeTypeForm}>
+                                Create new address
+                            </Button>
                         </div>
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
@@ -224,11 +235,11 @@ const CartCheckout = () => {
                     </div>
                 </div>
                 <div className="w-2/5 m-5 p-4 shadow-md">
-                    <h2 className=" text-lg font-bold">{currentUser?.full_name}</h2>
+                    <h2 className=" text-lg font-bold">{currentUser?.fullName}</h2>
                     <p className="text-base font-light text-zinc-500 mb-8">{cart?.note}</p>
                     <ul className="flex flex-col gap-4 mb-8">
                         {cartDetails.map((cart: CartDetailsData) => (
-                            <li key={cart.cart_id} className="flex justify-between ">
+                            <li key={cart.cartId} className="flex justify-between ">
                                 <div className="flex gap-2">
                                     <Image
                                         width={60}
@@ -239,10 +250,10 @@ const CartCheckout = () => {
                                     />
                                     <div>
                                         <h2 className="font-semibold">{cart.product.name}</h2>
-                                        <p className="font-semibold">x{cart.number_of_product}</p>
+                                        <p className="font-semibold">x{cart.numberOfProduct}</p>
                                     </div>
                                 </div>
-                                <div className="font-bold">{formatCurency(cart.number_of_product * cart.price)}</div>
+                                <div className="font-bold">{formatCurency(cart.numberOfProduct * cart.price)}</div>
                             </li>
                         ))}
                     </ul>

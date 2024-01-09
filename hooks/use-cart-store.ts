@@ -20,8 +20,8 @@ const useCartStore = create<CartStore>((set) => ({
     getCart: (data) =>
         set((state: CartStore) => ({
             ...state,
-            cart: { ...data, cart_details: [] },
-            cartDetails: data.cart_details,
+            cart: { ...data, cartDetails: [] },
+            cartDetails: data.cartDetails,
         })),
 
     setFetching: (isLoading) => set((state: CartStore) => ({ ...state, isLoading: isLoading })),
@@ -39,7 +39,7 @@ const useCartStore = create<CartStore>((set) => ({
             }
 
             const totalCart = updatedCartDetails.reduce((total, product: CartDetailsData) => {
-                const productCost = product.price * product.number_of_product;
+                const productCost = product.price * product.numberOfProduct;
                 return total + productCost;
             }, 0);
 
@@ -52,7 +52,7 @@ const useCartStore = create<CartStore>((set) => ({
         set((state: CartStore) => {
             const updatedCartDetails = state.cartDetails.filter((item) => item.id !== id);
             const totalCart = updatedCartDetails.reduce((total, product: CartDetailsData) => {
-                const productCost = product.price * product.number_of_product;
+                const productCost = product.price * product.numberOfProduct;
                 return total + productCost;
             }, 0);
             localStorage.setItem('totalCart', JSON.stringify(totalCart));

@@ -29,7 +29,7 @@ export const CartSheet = () => {
     const router = useRouter();
     const { toast } = useToast();
 
-    // const totalMoney = cartDetails.map((item) => item.total_money).reduce((a, b) => a + b, 0);
+    // const totalMoney = cartDetails.map((item) => item.totalMoney).reduce((a, b) => a + b, 0);
 
     const updateCartDetail = async (id: number, quantity: number) => {
         try {
@@ -85,7 +85,7 @@ export const CartSheet = () => {
                     </SheetDescription>
                 </SheetHeader>
                 <ScrollArea className="flex-1 ">
-                    {cartDetails.map(({ product, number_of_product, total_money, id }: CartDetailsData) => (
+                    {cartDetails.map(({ product, numberOfProduct, totalMoney, id }: CartDetailsData) => (
                         <div
                             className="mt-4 hover:bg-zinc-100 dark:hover:bg-zinc-900 p-2 -m-2 rounded-md cursor-pointer transition-all px-4"
                             key={id}
@@ -121,12 +121,12 @@ export const CartSheet = () => {
                                     <span onClick={() => updateCartDetail(id, 1)}>
                                         <Plus size={18} />
                                     </span>
-                                    <span className="px-2 text-sm">{number_of_product}</span>
+                                    <span className="px-2 text-sm">{numberOfProduct}</span>
                                     <span onClick={() => updateCartDetail(id, -1)}>
                                         <Minus size={18} />
                                     </span>
                                 </div>
-                                <strong className="text-lg">{formatCurency(total_money)}</strong>
+                                <strong className="text-lg">{formatCurency(totalMoney)}</strong>
                             </div>
                         </div>
                     ))}

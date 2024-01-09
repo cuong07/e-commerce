@@ -2,7 +2,7 @@ import { ProductData } from '@/type';
 import { create } from 'zustand';
 
 type ProductsResponse = {
-    total_pages: number;
+    totalPages: number;
     products: ProductData[];
 };
 
@@ -73,7 +73,7 @@ const useProductStore = create<ProductStore>((set) => ({
             return {
                 ...state,
                 productsData: updatedProductsData,
-                totalPage: data.total_pages,
+                totalPage: data.totalPages,
             };
         }),
 
@@ -100,7 +100,7 @@ const useProductStore = create<ProductStore>((set) => ({
             return {
                 ...state,
                 productsData: updatedProductsData,
-                totalPage: data.total_pages,
+                totalPage: data.totalPages,
             };
         }),
 

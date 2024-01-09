@@ -90,10 +90,10 @@ const CartPayment = () => {
         if (response.status) {
             const newOrder: OrderDTO = {
                 email: 'front.cuong@gmail.com',
-                fullname: currentUser?.full_name,
+                fullname: currentUser?.fullName,
                 note: cart?.note,
                 payment_method: paymentId === 3 ? 'VNPay' : 'COD',
-                phone_number: currentUser?.phone_number,
+                phone_number: currentUser?.phoneNumber,
                 shipping_address: '',
                 shipping_method: '',
                 total_money: totalMoney,

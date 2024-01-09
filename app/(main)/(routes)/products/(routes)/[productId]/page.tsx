@@ -1,7 +1,7 @@
-import { getDetailProduct } from '@/lib/api/products';
-import { request } from '@/lib/axios';
-import { ProductData, ProductImage } from '@/type';
 import React, { Suspense } from 'react';
+
+import { getDetailProduct } from '@/lib/api/products';
+import { ProductImage } from '@/type';
 import { ProductDetail } from './(components)/product-detail';
 import Skeleton from './(components)/skeleton';
 
@@ -14,12 +14,12 @@ interface ProductDetailPageProps {
 async function getProduct(productId: string) {
     try {
         const response = await getDetailProduct(productId);
-        const imageUrl = response.data.product_images.map((img: ProductImage) => ({
+        const imageUrl = response.data.productImages.map((img: ProductImage) => ({
             ...img,
-            image_url: process.env.NEXT_PUBLIC_BASE_URL + img.image_url,
+            imageUrl: process.env.NEXT_PUBLIC_BASE_URL + img.imageUrl,
         }));
-        const result = { ...response.data, product_images: imageUrl };
-        return result as ProductData;
+        const result = { ...response.data, productImages: imageUrl };
+        return result;
     } catch (error) {
         console.log('GET_DETAIL_PRODUCT_ERROR: ' + error);
     }
@@ -27,7 +27,7 @@ async function getProduct(productId: string) {
 
 const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
     const { productId } = params;
-    const product = (await getProduct(productId)) as ProductData;
+    const product = await getProduct(productId);
 
     return (
         <div className="lg:px-[160px]">

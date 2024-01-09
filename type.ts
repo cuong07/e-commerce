@@ -1,5 +1,3 @@
-import { number } from 'zod';
-
 export type ActionType = {
     title: string;
     link: string;
@@ -7,20 +5,20 @@ export type ActionType = {
 };
 
 export type UserLoginType = {
-    phone_number: string;
+    phoneNumber: string;
     password: string;
 };
 
 export type UserRegisterType = {
-    fullname: string;
+    fullName: string;
     password: string;
-    retype_password: string;
-    role_id: number;
+    retypePassword: string;
+    roleId: number;
     address: string;
-    facebook_account_id: number;
-    google_account_id: number;
-    date_of_birth: Date;
-    phone_number: string;
+    facebookAccountId: number;
+    googleAccountId: number;
+    dateOfBirth: Date;
+    phoneNumber: string;
 };
 
 export type ProductData = {
@@ -29,14 +27,14 @@ export type ProductData = {
     price: number;
     thumbnail: string;
     description: string;
-    category_id: number;
+    categoryId: number;
     url: string;
-    product_images: ProductImage[];
+    productImages: ProductImage[];
 };
 
 export type ProductImage = {
     id: number;
-    image_url: string;
+    imageUrl: string;
 };
 
 export type CategoryData = {
@@ -46,34 +44,34 @@ export type CategoryData = {
 
 export type CartDetailsData = {
     id: number;
-    cart_id: number;
+    cartId: number;
     product: ProductData;
-    number_of_product: number;
+    numberOfProduct: number;
     price: number;
-    total_money: number;
+    totalMoney: number;
     color: string;
 };
 
 export type CartData = {
     id: number;
-    user_id: number;
+    userId: number;
     note: string;
-    cart_details: CartDetailsData[];
-    is_active: boolean;
+    cartDetails: CartDetailsData[];
+    isActive: boolean;
 };
 
 export type CartDetailDTO = {
-    cart_id: number;
-    product_id: number;
-    number_of_product: number;
+    cartId: number;
+    productId: number;
+    numberOfProduct: number;
     price: number;
-    total_money: number;
+    totalMoney: number;
     color: string;
 };
 
 export type BaseData = {
-    created_at: number[];
-    updated_at: number[];
+    createdAt: number[];
+    updatedAt: number[];
     message: string;
     status: string;
 };
@@ -85,8 +83,8 @@ export type Role = {
 
 export type UserAddress = {
     id: number;
-    address_one: string;
-    address_second: string;
+    addressOne: string;
+    addressSecond: string;
     city: string;
     province: string;
     country: string;
@@ -101,13 +99,13 @@ export type AddressDTO = {
 
 export interface UserData extends BaseData {
     id: number;
-    full_name: string;
-    phone_number: string;
-    date_of_birth: Date;
-    facebook_account_id: number;
-    google_account_id: number;
+    fullName: string;
+    phoneNumber: string;
+    dateOfBirth: Date;
+    facebookAccountId: number;
+    googleAccountId: number;
     role: Role;
-    user_addresses: UserAddress[];
+    userAddresses: UserAddress[];
 }
 
 export type OrderDTO = {
