@@ -73,7 +73,7 @@ export const CartSheet = () => {
                 <Button variant="ghost" className="hover:bg-transparent relative max-md:px-4 max-md:py-6 ">
                     <ShoppingCart className="" size={20} />
                     <Badge className="text-xs absolute top-1 right-1 py-[2px] px-[2px] bg-transparent">
-                        {cartDetails.length}
+                        {cartDetails?.length}
                     </Badge>
                 </Button>
             </SheetTrigger>
