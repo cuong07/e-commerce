@@ -15,8 +15,7 @@ const useCartStore = create<CartStore>((set) => ({
     cart: null,
     cartDetails: [],
     isFetching: true,
-    totalMoney: parseFloat(localStorage.getItem('totalCart') || '0'),
-
+    totalMoney: parseFloat((typeof localStorage !== 'undefined' && localStorage.getItem('totalCart')) || '0'),
     getCart: (data) =>
         set((state: CartStore) => ({
             ...state,

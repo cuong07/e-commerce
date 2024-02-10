@@ -122,7 +122,7 @@ const CartDetails = () => {
                                 <p>Tax</p>
                                 <p className="">$00</p>
                             </div>
-                            <div className="font-medium flex justify-between">
+                            <div className=" justify-between font-medium flex ">
                                 <p>Shipping</p>
                                 <p className="">$3</p>
                             </div>

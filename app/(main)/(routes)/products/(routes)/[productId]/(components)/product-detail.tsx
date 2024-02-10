@@ -8,7 +8,7 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { useModalStore } from '@/hooks/use-modal-store';
 import Breadcrumbs from '@/components/sreadcrumbs';
 import { Button } from '@/components/ui/button';
-import { CartDetailDTO, ProductData, ProductImage } from '@/type';
+import { CartDetailDTO, ProductData, ProductImage, ReviewData } from '@/type';
 
 import { getProducts } from '@/lib/api/products';
 import { CardProduct } from '@/components/card/card-product';
@@ -24,10 +24,14 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import { useEffectOneCall } from '@/hooks/use-effect-one-call';
+import { getReviewByProuductId } from '@/lib/api/review';
+import { ReviewItem } from '@/components/review/review-item';
 
-export const ProductDetail = ({ product }: { product: ProductData }) => {
+export const ProductDetail = ({ product, productId }: { product: ProductData; productId: number }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
     const [products, setProducts] = useState<ProductData[]>([]);
+    const [reviews, setReviews] = useState<ReviewData[]>([]);
     const [quantity, setQuantity] = useState<number>(1);
     // hooks
     const alert = useAlertStore();
@@ -37,7 +41,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
     const { onOpen } = useModalStore();
     const router = useRouter();
 
-    const myImage: StaticImageData =
+    const myImage: string =
         'https://st.depositphotos.com/2934765/53192/v/450/depositphotos_531920820-stock-illustration-photo-available-vector-icon-default.jpg';
 
     const handleOpenImageModal = () => {
@@ -63,6 +67,13 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
         };
         fetchData();
     }, [product]);
+
+    useEffectOneCall(() => {
+        (async () => {
+            const response = await getReviewByProuductId(productId);
+            setReviews(response.content);
+        })();
+    });
 
     const handleIncreaseQuantity = () => {
         setQuantity(quantity + 1);
@@ -115,6 +126,7 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
             console.log('GET_PRODUCT_ERROR', error);
         }
     };
+
     return (
         <div className=" flex flex-col gap-4 container max-md:px-4">
             <Breadcrumbs
@@ -240,6 +252,21 @@ export const ProductDetail = ({ product }: { product: ProductData }) => {
                         enim officia recusandae?
                     </article>
                 </section>
+            </div>
+            <hr className="border-t border-gray-300 my-20" />
+            <div className="">
+                <h2 className="font-bold text-3xl mb-20">{`Customer reviews(${reviews.length})`}</h2>
+                <div className="flex">
+                    <div className="w-3/5 grid grid-cols-1 md:grid-cols-2">
+                        {reviews?.map((item) => <ReviewItem review={item} key={item.id} />)}
+                        {reviews?.length === 0 && (
+                            <h1 className="text-lg font-semibold text-center">No reviews found</h1>
+                        )}
+                    </div>
+                    <div className="flex-1  flex justify-center">
+                        <div className="w-[60%] h-[300px] border-[1px] border-zinc-300 rounded-md shadow-md"></div>
+                    </div>
+                </div>
             </div>
             <hr className="border-t border-gray-300 my-20" />
             <div>

@@ -32,7 +32,7 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
     return (
         <div className="lg:px-[160px]">
             <Suspense fallback={<Skeleton />}>
-                <ProductDetail product={product} />
+                <ProductDetail product={product} productId={parseInt(productId)} />
             </Suspense>
         </div>
     );

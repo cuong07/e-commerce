@@ -61,11 +61,11 @@ export type CartData = {
 };
 
 export type CartDetailDTO = {
-    cartId: number;
-    productId: number;
-    numberOfProduct: number;
+    cart_id: number;
+    product_id: number;
+    number_of_product: number;
     price: number;
-    totalMoney: number;
+    total_money: number;
     color: string;
 };
 
@@ -119,3 +119,11 @@ export type OrderDTO = {
     payment_method: string;
     address_id: number;
 };
+
+export interface ReviewData extends BaseData {
+    content: string;
+    id: number;
+    isEdited: boolean;
+    rating: number;
+    user: UserData;
+}

@@ -79,13 +79,13 @@ export const CartSheet = () => {
             </SheetTrigger>
             <SheetContent className="flex flex-col">
                 <SheetHeader>
-                    <SheetTitle>{`My Cart (${cartDetails.length})`}</SheetTitle>
+                    <SheetTitle>{`My Cart (${cartDetails?.length})`}</SheetTitle>
                     <SheetDescription>
                         Make changes to your cart here. Click checkout when you`re done.
                     </SheetDescription>
                 </SheetHeader>
                 <ScrollArea className="flex-1 ">
-                    {cartDetails.map(({ product, numberOfProduct, totalMoney, id }: CartDetailsData) => (
+                    {cartDetails?.map(({ product, numberOfProduct, totalMoney, id }: CartDetailsData) => (
                         <div
                             className="mt-4 hover:bg-zinc-100 dark:hover:bg-zinc-900 p-2 -m-2 rounded-md cursor-pointer transition-all px-4"
                             key={id}

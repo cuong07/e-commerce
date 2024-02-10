@@ -64,7 +64,6 @@ const Page = () => {
                     <BannerCategory data={categories} />
                 </div>
             </section>
-            {/* <CursorProvider /> */}
         </div>
     );
 };

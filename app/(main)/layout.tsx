@@ -1,15 +1,16 @@
 'use client';
+
+import { MapPin } from 'lucide-react';
+
 import { FooterMain } from '@/components/footer/footer-main';
 import { HeaderSearch } from '@/components/header/header-search';
 import { Navigation } from '@/components/navigation/navigation';
-import useAuthStore from '@/hooks/use-auth-store';
-import useCartStore from '@/hooks/use-cart-store';
 import { useEffectOneCall } from '@/hooks/use-effect-one-call';
 import { useModalStore } from '@/hooks/use-modal-store';
 import { getCurrentCartByUser } from '@/lib/api/cart';
 import { getCurrentUser } from '@/lib/api/user';
-import { MapPin } from 'lucide-react';
-import { useEffect } from 'react';
+import useAuthStore from '@/hooks/use-auth-store';
+import useCartStore from '@/hooks/use-cart-store';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
     const { getCart, setFetching } = useCartStore();

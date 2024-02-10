@@ -27,7 +27,7 @@ interface IAuthStore {
 const useAuthStore = create<IAuthStore>((set) => ({
     loginData: {
         message: '',
-        token: localStorage.getItem('token') || null,
+        token: (typeof localStorage !== 'undefined' && localStorage.getItem('token')) || null,
     },
     registerData: {
         fullName: '',
