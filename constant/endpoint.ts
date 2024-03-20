@@ -34,6 +34,7 @@ export const OrderV1 = {
     GET_ORDER_PAYMENT_NVPAY: '/payments/submit-order',
     GET_PAYMENT_VNPAY_STATUS: '/payments/status/nvpay-payment',
     CREATE_ORDER_PAYMENT_NVPAY: '/payments/nvpay-payment/order-success',
+    GET_ALL_ORDER_BY_USER: '/orders/user/all',
 };
 
 export const ReviewV1 = {

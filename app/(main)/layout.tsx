@@ -11,11 +11,14 @@ import { getCurrentCartByUser } from '@/lib/api/cart';
 import { getCurrentUser } from '@/lib/api/user';
 import useAuthStore from '@/hooks/use-auth-store';
 import useCartStore from '@/hooks/use-cart-store';
+import StoreLocation from '@/components/map/store-location';
+import { useState } from 'react';
+import Link from 'next/link';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
     const { getCart, setFetching } = useCartStore();
     const { onOpen } = useModalStore();
-    const { loginData, setCurrentUser } = useAuthStore();
+    const { loginData, setCurrentUser, currentUser } = useAuthStore();
 
     useEffectOneCall(() => {
         if (loginData?.token) {
@@ -72,9 +75,13 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                     <div className="md:flex hidden gap-6 items-center">
                         <div className="flex gap-2 items-center">
                             <MapPin size={16} className="dark:text-zinc-300 text-zinc-500" />
-                            <p>Store Location</p>
+                            <p>
+                                <a href="#map">Store Location</a>
+                            </p>
                         </div>
-                        <div>Track your order</div>
+                        <div>
+                            <Link href={`/order/${currentUser?.id}`}>Track your order</Link>
+                        </div>
                     </div>
                 </div>
                 <div>{children}</div>

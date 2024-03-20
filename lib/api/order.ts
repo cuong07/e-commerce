@@ -45,3 +45,16 @@ export const getPaymentStatus = async () => {
         throw error;
     }
 };
+
+export const getAllOrders = async () => {
+    const url = qs.stringifyUrl({
+        url: OrderV1.GET_ALL_ORDER_BY_USER,
+    });
+    try {
+        const response = await requsetInstance.get(url);
+        return response.data;
+    } catch (error) {
+        console.log('GET_PAYMENT_VNPAY_STATUS_ERROR:', error);
+        throw error;
+    }
+};

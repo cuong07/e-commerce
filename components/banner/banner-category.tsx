@@ -14,7 +14,7 @@ export const BannerCategory: React.FC<BannerCategoryProps> = ({ data }) => {
         getCategoryId(parseInt(id));
     };
     return (
-        <div className="grid grid-cols-2 lg:grid-cols-3 container gap-x-4 gap-y-4 xl:grid-cols-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-4 xl:grid-cols-6">
             {data.map((category) => (
                 <Link
                     href={`/products/search?category=${category.name}`}

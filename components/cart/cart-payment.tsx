@@ -41,7 +41,7 @@ const PaymentType = [
 const CartPayment = () => {
     const [paymentId, setPaymentId] = useState<number>(PaymentType[2].id);
     const [isShow, setIsShow] = useState<boolean>(false);
-    const { totalMoney, cart } = useCartStore();
+    const { totalMoney, cart, cartDetails } = useCartStore();
     const { currentUser } = useAuthStore();
     const pathName = useSearchParams();
     const { toast } = useToast();
@@ -54,6 +54,12 @@ const CartPayment = () => {
     };
 
     const handleClickContinue = async () => {
+        if (cartDetails && cartDetails.length <= 0) {
+            return toast({
+                description: <span className="flex">Cart is empty</span>,
+                variant: 'destructive',
+            });
+        }
         if (paymentId === 4) {
             return router.push('/carts/checkout/success');
         }
@@ -69,13 +75,6 @@ const CartPayment = () => {
         if (!currentUser) {
             return toast({
                 description: <span className="flex">Please to login</span>,
-                variant: 'destructive',
-            });
-        }
-
-        if (!cart) {
-            return toast({
-                description: <span className="flex">Cart is empty</span>,
                 variant: 'destructive',
             });
         }

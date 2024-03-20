@@ -34,6 +34,7 @@ const nextConfig = {
             'inkythuatso.com',
             'www.mungbaobao.com',
             'cdn.pixabay.com',
+            'vn.louisvuitton.com',
         ],
     },
 };

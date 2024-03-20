@@ -127,3 +127,58 @@ export interface ReviewData extends BaseData {
     rating: number;
     user: UserData;
 }
+
+export type LocationStoreData = {
+    lng: number;
+    lat: number;
+    name: string;
+    image: string;
+    addess: string;
+};
+
+export enum OrderStatus {
+    PENDING = 'pending',
+    PROCESSING = 'processing',
+    SHOPPED = 'shopped',
+    DELIVERED = 'delivered',
+    CANCELLED = 'cancelled',
+}
+
+export interface OrderPayment extends BaseData {
+    id: number;
+    user: UserData;
+    note: string;
+    total: number;
+    paymentTime: Date;
+    transactionId: string;
+    isActive: boolean;
+}
+
+export type OrderDetailData = {
+    id: number;
+    product: ProductData;
+    price: number;
+    numberOfProducts: number;
+    totalMoney: number;
+    color: string;
+};
+
+export type OrderData = {
+    id: number;
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    note: string;
+    orderDate: Date;
+    status: OrderStatus;
+    totalMoney: number;
+    shippingMethod: string;
+    shippingAddress: string;
+    shippingDate: Date;
+    trackingNumber: number;
+    paymentMethod: string;
+    active: boolean;
+    orderPayment: OrderPayment;
+    userAddress: UserAddress;
+    orderDetails: OrderDetailData[];
+};

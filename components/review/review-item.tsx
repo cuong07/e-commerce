@@ -6,6 +6,7 @@ import moment from 'moment';
 import { RatingStar } from '../rating/rating-star';
 import { Button } from '../ui/button';
 import useAuthStore from '@/hooks/use-auth-store';
+import { Edit, Reply } from 'lucide-react';
 
 // import userNoImage from '@/assets/user.png';
 
@@ -18,7 +19,7 @@ export const ReviewItem = ({ review }: { review: ReviewData }) => {
                 <Image
                     width={48}
                     height={48}
-                    className="rounded-full border-[2px] border-zinc-600"
+                    className="rounded-full border-[2px] p-[2px] border-green-500"
                     src={noImage}
                     alt={review.user.fullName}
                 />
@@ -27,14 +28,25 @@ export const ReviewItem = ({ review }: { review: ReviewData }) => {
                     <p className="text-xs font-semibold text-zinc-500">{moment(review.createdAt).format('llll')}</p>
                 </div>
             </div>
-            <div className="ml-16">
-                <div>
+            <div className="mt-4">
+                <div className="flex items-center  gap-2">
+                    <span className="text-sm font-medium">{review.rating}</span>
                     <RatingStar rate={review.rating} />
                 </div>
-                <article className="text-base">{review.content}</article>
+                <article className="text-base mt-1 text-zinc-700 min-h-[72px]">
+                    “ {review.content.substring(0, 150)}”
+                </article>
                 <ul className="flex  text-sm font-semibold">
-                    <li className="px-2">reply</li>
-                    {currentUser && currentUser.id === review.user.id && <li className="px-2 ">edit</li>}
+                    <li className="px-2 gap-1 flex items-center cursor-pointer hover:text-zinc-500">
+                        <Reply size={16} />
+                        reply
+                    </li>
+                    {currentUser && currentUser.id === review.user.id && (
+                        <li className="px-2 gap-1 flex items-center cursor-pointer hover:text-zinc-500">
+                            <Edit size={16} />
+                            edit
+                        </li>
+                    )}
                 </ul>
             </div>
         </div>

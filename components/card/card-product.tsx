@@ -26,6 +26,7 @@ export const CardProduct = ({
     const { toast } = useToast();
     const { contextImgageUrl } = useContextStore();
     const { onOpen } = useAlertStore();
+    console.log(product);
 
     const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
@@ -63,7 +64,7 @@ export const CardProduct = ({
     };
 
     return (
-        <Card className="flex flex-col h-[320px] rounded-lg shadow-sm cursor-pointer">
+        <Card className="flex flex-col min-h-[360px] rounded-lg shadow-sm cursor-pointer">
             <CardContent className="p-0 h-[70%] relative group ">
                 <Carousel className="h-full w-full overflow-hidden ">
                     <CarouselContent>
@@ -92,8 +93,8 @@ export const CardProduct = ({
                 onClick={(e) => handleClick(e, product.id)}
             >
                 <div className="flex flex-col">
-                    <h2 className="font-medium text-base hover:underline">{product.name}</h2>
-                    <p className="text-sm font-extralight">{product.description.substring(20)}</p>
+                    <h2 className="font-medium text-base hover:underline">{product.name.substring(0, 20)}</h2>
+                    <p className="text-sm font-extralight">{product.description.substring(0, 20)}...</p>
                 </div>
                 <div className="flex justify-between w-full items-center">
                     <div className="flex gap-2  items-center">

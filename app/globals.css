@@ -7,6 +7,7 @@ body,
 :root {
     height: 100%;
     font-family: var(--open-sans-font), sans-serif;
+    scroll-behavior: smooth;
 }
 
 @layer base {

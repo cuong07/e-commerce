@@ -22,6 +22,12 @@ const CartDetails = () => {
     const { toast } = useToast();
 
     const handleClickContinue = () => {
+        if (cartDetails && cartDetails.length <= 0) {
+            return toast({
+                description: <span className="flex">Cart is empty</span>,
+                variant: 'destructive',
+            });
+        }
         router.push(`/carts/checkout?step=${2}`);
     };
 
