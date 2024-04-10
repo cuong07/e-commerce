@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import StoreLocation from '@/components/map/store-location';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 const listStoreLocation: LocationStoreData[] = [
     {
@@ -72,7 +73,7 @@ const Page = () => {
     };
 
     return (
-        <div className="relative ">
+        <div className="relative">
             <BannerSlide />
             <div className="my-16" data-scroll-section>
                 <h2 className="font-bold md:text-6xl max-md:px-6 text-xl text-center tracking-tight mb-2 break-all ">
@@ -84,29 +85,33 @@ const Page = () => {
             </div>
             <section className="my-10 font-semibold">
                 <div className="container mt-12">
-                    <h2 className="md:text-4xl text-xl text-left tracking-tighter mb-8 break-all">
-                        Preferred category
-                    </h2>
+                    <h2 className="md:text-4xl text-xl text-left tracking-tighterbreak-all">Preferred category</h2>
+                    <div className="border-t-4 w-1/6 mt-2 border-black mb-10"></div>
                     <div>
                         <BannerCategory data={categories} />
                     </div>
                 </div>
                 <div className="container mt-12">
-                    <h2 className="md:text-4xl text-xl text-left tracking-tighter mb-8 break-all">
-                        Product you may like
-                    </h2>
+                    <h2 className="md:text-4xl text-xl text-left tracking-tighter break-all">Product you may like</h2>
+                    <div className="border-t-4 w-1/6 mt-2 border-black mb-10"></div>
                     <div className="grid lg:grid-cols-4 lg:gap-x-6 lg:gap-y-8">
                         {products?.map((product) => (
                             <CardProduct key={product.id} product={product} handleClick={handleClick} />
                         ))}
                     </div>
-                    <Button className="text-base " variant="link" size="lg">
-                        <Link href="products">View all</Link>
-                    </Button>
+                    <div className="flex items-center justify-center mt-10 ">
+                        <Button className="text-base" variant="link" size="lg">
+                            <Link href="products" className="flex gap-2 items-center underline">
+                                View all product <ArrowRight size={18} className="animate-pulse" />
+                            </Link>
+                        </Button>
+                    </div>
                 </div>
             </section>
             <div className="container mt-12" id="map">
-                <h1 className="md:text-4xl text-xl font-bold mb-8 ">List store location</h1>
+                <h1 className="md:text-4xl text-xl font-bold ">List store location</h1>
+                <div className="border-t-4 w-1/6 mt-2 border-black mb-10"></div>
+
                 <section className="flex">
                     <div className="flex-1">
                         <ul className="flex flex-col gap-4">
@@ -118,7 +123,9 @@ const Page = () => {
                             ))}
                         </ul>
                     </div>
-                    <StoreLocation listStore={listStoreLocation} />
+                    <div className="w-[800px] h-[600px] rounded-lg overflow-hidden shadow-md">
+                        <StoreLocation listStore={listStoreLocation} />
+                    </div>
                 </section>
             </div>
         </div>

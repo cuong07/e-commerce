@@ -256,16 +256,16 @@ export const ProductDetail = ({ product, productId }: { product: ProductData; pr
             <hr className="border-t border-gray-300 my-20" />
             <div className="">
                 <h2 className="font-bold text-3xl mb-20">{`Customer reviews(${reviews.length})`}</h2>
+                {reviews?.length === 0 && <h1 className="text-lg font-semibold text-center">No reviews found</h1>}
                 <div className="flex  flex-col-reverse lg:flex-row">
                     <div className="lg:w-3/5 w-full grid grid-cols-1 md:grid-cols-2">
                         {reviews?.map((item) => <ReviewItem review={item} key={item.id} />)}
-                        {reviews?.length === 0 && (
-                            <h1 className="text-lg font-semibold text-center">No reviews found</h1>
-                        )}
                     </div>
-                    <div className="flex-1  flex justify-center">
-                        <div className="w-[60%] h-[300px] border-[1px] border-zinc-300 rounded-md shadow-md"></div>
-                    </div>
+                    {reviews.length > 0 && (
+                        <div className="flex-1  flex justify-center">
+                            <div className="w-[60%] h-[300px] border-[1px] border-zinc-300 rounded-md shadow-md"></div>
+                        </div>
+                    )}
                 </div>
             </div>
             <hr className="border-t border-gray-300 my-20" />

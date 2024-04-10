@@ -9,7 +9,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { formatCurency } from '@/lib/utils';
 import useCartStore from '@/hooks/use-cart-store';
 import { Button } from '@/components/ui/button';
-import { createOrderWithPayment, getPaymentNVPay, getPaymentStatus } from '@/lib/api/order';
+import { createOrderCOD, createOrderWithPayment, getPaymentNVPay, getPaymentStatus } from '@/lib/api/order';
 import { ConfirmModal } from '@/components/modals/confirm-modal';
 import { OrderDTO } from '@/type';
 import useAuthStore from '@/hooks/use-auth-store';
@@ -54,14 +54,62 @@ const CartPayment = () => {
     };
 
     const handleClickContinue = async () => {
+        if (!currentUser) {
+            return toast({
+                description: <span className="flex">Please to login</span>,
+                variant: 'destructive',
+            });
+        }
+
+        if (!addressId) {
+            return toast({
+                description: <span className="flex">Please select address</span>,
+                variant: 'destructive',
+            });
+        }
+
         if (cartDetails && cartDetails.length <= 0) {
             return toast({
                 description: <span className="flex">Cart is empty</span>,
                 variant: 'destructive',
             });
         }
+
         if (paymentId === 4) {
-            return router.push('/carts/checkout/success');
+            const newOrder: OrderDTO = {
+                email: 'front.cuong@gmail.com',
+                fullname: currentUser?.fullName,
+                note: cart?.note,
+                payment_method: 'COD',
+                phone_number: currentUser?.phoneNumber,
+                shipping_address: '',
+                shipping_method: '',
+                total_money: totalMoney,
+                address_id: parseInt(addressId),
+            };
+            try {
+                setIsShow(false);
+                const response = await createOrderCOD(newOrder);
+                if (response.status === 200) {
+                    toast({
+                        description: <span className="flex">Order success</span>,
+                        variant: 'success',
+                    });
+                    return router.push('/carts/checkout/success');
+                } else {
+                    setIsShow(false);
+                    return toast({
+                        description: <span className="flex">Order error</span>,
+                        variant: 'destructive',
+                    });
+                }
+            } catch (error) {
+                setIsShow(false);
+                return toast({
+                    description: <span className="flex">Order error</span>,
+                    variant: 'destructive',
+                });
+            }
         }
 
         if (paymentId === 3 && cart) {
@@ -149,7 +197,7 @@ const CartPayment = () => {
                                 />
                                 <Image width={40} height={40} src={item.url} alt={item.name} />
                                 <h2 className="font-semibold text-lg flex-1 flex justify-between items-center">
-                                    {item.name}{' '}
+                                    {item.name}
                                     <span className="text-xs font-light text-zinc-400 animate-pulse">
                                         {item.id === 1 || item.id === 2 ? 'updating...' : ''}
                                     </span>

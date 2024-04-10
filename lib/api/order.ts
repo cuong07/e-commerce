@@ -33,6 +33,19 @@ export const createOrderWithPayment = async (data: OrderDTO) => {
     }
 };
 
+export const createOrderCOD = async (data: OrderDTO) => {
+    const url = qs.stringifyUrl({
+        url: OrderV1.CREATE_ORDER_COD,
+    });
+    try {
+        const response = await requsetInstance.post(url, data);
+        return response;
+    } catch (error) {
+        console.log('CREATE_ORDER_COD:', error);
+        throw error;
+    }
+};
+
 export const getPaymentStatus = async () => {
     const url = qs.stringifyUrl({
         url: OrderV1.GET_PAYMENT_VNPAY_STATUS,

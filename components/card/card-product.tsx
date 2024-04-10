@@ -1,14 +1,16 @@
 'use client';
+
 import { CartDetailDTO, ProductData } from '@/type';
 import Image from 'next/image';
 import React from 'react';
+import { CheckCheck, ShoppingCart, ShoppingCartIcon } from 'lucide-react';
+
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import { formatCurency } from '@/lib/utils';
 import useCartStore from '@/hooks/use-cart-store';
 import { createCartDetail } from '@/lib/api/cart';
 import { useToast } from '@/hooks/use-toast';
-import { CheckCheck, ShoppingCart, ShoppingCartIcon } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel';
 import useContextStore from '@/hooks/use-context-store';
 import { useAlertStore } from '@/hooks/use-alert-store';

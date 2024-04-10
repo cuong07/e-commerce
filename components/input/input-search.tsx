@@ -76,10 +76,10 @@ export const InputSearch = ({ handleSearch }: IInputSearchProps) => {
                     value={keyword}
                     onFocus={handleFoucs}
                     autoComplete="off"
-                    className="rounded-full focus-visible:ring-0 focus-visible:outline-none"
+                    className="rounded-lg focus-visible:ring-0 focus-visible:outline-none"
                     onBlur={handleBlur}
                 />
-                <Button className="flex gap-2" variant="default" onClick={handleSumit}>
+                <Button className="flex rounded-lg gap-2" variant="default" onClick={handleSumit}>
                     <Search size={20} className="" />
                     <span className="md:block hidden">Search</span>
                 </Button>

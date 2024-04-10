@@ -112,7 +112,7 @@ export type OrderDTO = {
     fullname: string;
     email: string;
     phone_number: string;
-    note: string;
+    note: string | undefined;
     total_money: number;
     shipping_method: string;
     shipping_address: string;

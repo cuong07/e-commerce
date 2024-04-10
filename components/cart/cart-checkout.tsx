@@ -128,7 +128,6 @@ const CartCheckout = () => {
             form.setValue('country', updateAddress.country);
             form.setValue('province', updateAddress.province);
         }
-        console.log(updateAddress);
     };
 
     const handleChangeCheckbox = (value: string) => {

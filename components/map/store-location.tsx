@@ -15,7 +15,7 @@ const StoreLocation = ({ listStore }: { listStore: LocationStoreData[] }) => {
                 latitude: 10.783906898914676,
                 zoom: 10,
             }}
-            style={{ width: 800, height: 600 }}
+            style={{ width: '100%', height: '100%' }}
             mapStyle="mapbox://styles/mapbox/streets-v9"
             mapboxAccessToken="pk.eyJ1IjoiYXpxYzQ3IiwiYSI6ImNsc29kbXdpMjBlcGMya24xanp6bHZ5enMifQ.PYUxNjqZau-ce0MyJHY3vw"
         >

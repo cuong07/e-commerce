@@ -29,6 +29,7 @@
         "@studio-freight/react-lenis": "^0.0.38",
         "@types/gsap": "^3.0.0",
         "axios": "^1.6.2",
+        "chart.js": "2.9.3",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.0.0",
         "date-fns": "^2.30.0",

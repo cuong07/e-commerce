@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { nav } from '@/lib/utils';
@@ -12,6 +13,7 @@ import {
 } from '@/components/ui/navigation-menu';
 import NavigationItem from './navigation-item';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const products: { title: string; href: string; description: string }[] = [
     {
@@ -32,28 +34,15 @@ export const Navigation = () => {
                             <li className="row-span-3">
                                 <NavigationMenuLink asChild>
                                     <a
-                                        className="flex h-full w-full select-none flex-col
-                    justify-end rounded-md bg-gradient-to-b from-zinc-700/50
-                    to-zinc-600 p-6 no-underline outline-none focus:shadow-md"
+                                        className="flex full w-full select-none flex-col justify-end rounded-md bg-contain bg-blend-saturation p-6 no-underline outline-none focus:shadow-md bg-[url('/banner.png')]"
                                         href="/"
                                     >
-                                        <div className="h-6 w-6 text-zinc-200">Logo</div>
-                                        <div className="mb-2 mt-4 text-lg font-medium text-zinc-200">CShop</div>
-                                        <p className="text-sm leading-tight  text-zinc-200">
-                                            Discover clothing than enhances your lifestyle. Explore a world-class
-                                            selection of top-quantity apparel toilored to your needs and style
-                                            preferences.
-                                        </p>
+                                        <div className="h-14 text-lg font-medium text-zinc-200"></div>
                                     </a>
                                 </NavigationMenuLink>
                             </li>
-
-                            <NavigationItem href="/docs" title="Introduction"></NavigationItem>
-                            <NavigationItem href="/docs/installation" title="Installation">
-                                How to install dependencies and structure your app.
-                            </NavigationItem>
-                            <NavigationItem href="/docs/primitives/typography" title="Typography">
-                                Styles for headings, paragraphs, lists...etc
+                            <NavigationItem href="/docs" title="Introduction">
+                                Re-usable components built using Radix UI and Tailwind CSS.
                             </NavigationItem>
                         </ul>
                     </NavigationMenuContent>
@@ -75,12 +64,7 @@ export const Navigation = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                    <Link href="/collections" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>Collections</NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <Link href="/collections" legacyBehavior passHref>
+                    <Link href="/" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>Collections</NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
