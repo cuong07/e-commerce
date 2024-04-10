@@ -36,7 +36,7 @@ const OrderPage = () => {
                             </div>
                             <div className="flex gap-2">
                                 <div className="font-semibold">Order date:</div>
-                                <h2>{moment(order.orderDate).subtract(1, 'days').calendar()}</h2>
+                                <h2>{order.orderDate}</h2>
                             </div>
                             <div className="flex gap-2">
                                 <div className="font-semibold">Address:</div>

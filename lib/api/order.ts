@@ -1,7 +1,8 @@
+import qs from 'query-string';
+
 import { OrderV1 } from '@/constant/endpoint';
 import requsetInstance from '@/interceptors/token-interceptor';
 import { OrderDTO } from '@/type';
-import qs from 'query-string';
 
 export const getPaymentNVPay = async (amount: number, orderInfo: string) => {
     const url = qs.stringifyUrl({

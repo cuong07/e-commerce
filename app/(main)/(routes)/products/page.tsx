@@ -9,6 +9,27 @@ import { useModalStore } from '@/hooks/use-modal-store';
 import { LoadMore } from '@/components/load-more';
 import ScrollTop from '@/components/scroll-top';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+
+const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            delayChildren: 0.3,
+            staggerChildren: 0.2,
+        },
+    },
+};
+
+const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+    },
+};
 
 const ProductsPage = () => {
     const router = useRouter();
@@ -52,11 +73,18 @@ const ProductsPage = () => {
             {isLoading && <Skeleton numberElement={12} />}
             {!isLoading && (
                 <div>
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+                    <motion.ul
+                        variants={container}
+                        initial="hidden"
+                        animate="visible"
+                        className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8"
+                    >
                         {productsData?.map((product: ProductData, index: number) => (
-                            <CardProduct product={product} handleClick={handleClickCard} key={index} />
+                            <motion.li key={index} variants={item}>
+                                <CardProduct product={product} handleClick={handleClickCard} />
+                            </motion.li>
                         ))}
-                    </div>
+                    </motion.ul>
                     {totalPage > 1 && (
                         <>
                             <LoadMore loadMore={nextPage} skeleton={<Skeleton numberElement={8} />} />

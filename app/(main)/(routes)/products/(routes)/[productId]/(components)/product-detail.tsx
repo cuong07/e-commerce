@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { StaticImageData } from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { CheckCheck, Heart, Minus, Plus, ShoppingCart } from 'lucide-react';
+import { CheckCheck, Heart, Minus, Plus, ShoppingCart, Star } from 'lucide-react';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { useModalStore } from '@/hooks/use-modal-store';
 import Breadcrumbs from '@/components/sreadcrumbs';
@@ -13,7 +13,7 @@ import { CartDetailDTO, ProductData, ProductImage, ReviewData } from '@/type';
 import { getProducts } from '@/lib/api/products';
 import { CardProduct } from '@/components/card/card-product';
 import { useRouter } from 'next/navigation';
-import { formatCurency } from '@/lib/utils';
+import { averageReview, formatCurency } from '@/lib/utils';
 import { createCartDetail } from '@/lib/api/cart';
 import useAuthStore from '@/hooks/use-auth-store';
 import useCartStore from '@/hooks/use-cart-store';
@@ -262,8 +262,15 @@ export const ProductDetail = ({ product, productId }: { product: ProductData; pr
                         {reviews?.map((item) => <ReviewItem review={item} key={item.id} />)}
                     </div>
                     {reviews.length > 0 && (
-                        <div className="flex-1  flex justify-center">
-                            <div className="w-[60%] h-[300px] border-[1px] border-zinc-300 rounded-md shadow-md"></div>
+                        <div className="flex-1 flex justify-center">
+                            <div className="w-[60%] h-[300px] border-[1px] border-zinc-300 rounded-md shadow-md p-6">
+                                <div className="flex items-center justify-center gap-2">
+                                    <h2 className="text-4xl font-bold text-center">{averageReview(reviews)}</h2>
+                                    <span>
+                                        <Star size={38} fill="#f9fd09" stroke="#f9fd09" />
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>

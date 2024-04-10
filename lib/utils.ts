@@ -4,9 +4,11 @@ import image_2 from '@/assets/home/image-banner-2.jpg';
 import image_3 from '@/assets/home/image-banner-3.jpg';
 import image_4 from '@/assets/home/image-banner-4.jpg';
 import image_5 from '@/assets/home/image-banner-5.jpg';
+import { ReviewData } from '@/type';
 
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
@@ -16,6 +18,12 @@ export const formatCurency = (price: number) => {
         style: 'currency',
         currency: 'USD',
     }).format(price);
+};
+
+export const averageReview = (reviews: ReviewData[]) => {
+    let total = 0;
+    reviews.forEach((item) => (total += item.rating));
+    return (total / reviews.length).toFixed(1);
 };
 
 export const nav = [
