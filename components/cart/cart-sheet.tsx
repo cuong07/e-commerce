@@ -23,6 +23,8 @@ import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useRouter } from 'next/navigation';
 
+import { motion } from 'framer-motion';
+
 export const CartSheet = () => {
     const { contextImgageUrl } = useContextStore();
     const { cartDetails, setCartDetail, deleteCartDetail, totalMoney } = useCartStore();

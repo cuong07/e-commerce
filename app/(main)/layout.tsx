@@ -76,7 +76,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                         <div className="flex gap-2 items-center">
                             <MapPin size={16} className="dark:text-zinc-300 text-zinc-500" />
                             <p>
-                                <a href="#map">Store Location</a>
+                                <a href="/#map">Store Location</a>
                             </p>
                         </div>
                         <div>

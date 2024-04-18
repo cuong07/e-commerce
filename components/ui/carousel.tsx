@@ -173,12 +173,10 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
         return (
-            <Button
+            <button
                 ref={ref}
-                variant={variant}
-                size={size}
                 className={cn(
-                    'absolute  h-8 w-8 rounded-full',
+                    'absolute  h-8 w-8 rounded-full bg-white items-center flex justify-center disabled:bg-zinc-300 disabled:cursor-not-allowed disabled:opacity-95',
                     orientation === 'horizontal'
                         ? 'left-1 top-1/2 -translate-y-1/2'
                         : 'top-1 left-1/2 -translate-x-1/2 rotate-90',
@@ -190,7 +188,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
             >
                 <ArrowLeft className="h-4 w-4" />
                 <span className="sr-only">Previous slide</span>
-            </Button>
+            </button>
         );
     },
 );
@@ -201,12 +199,10 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         const { orientation, scrollNext, canScrollNext } = useCarousel();
 
         return (
-            <Button
+            <button
                 ref={ref}
-                variant={variant}
-                size={size}
                 className={cn(
-                    'absolute h-8 w-8 rounded-full',
+                    'absolute  h-8 w-8 rounded-full bg-white items-center flex justify-center  disabled:bg-zinc-300 disabled:cursor-not-allowed disabled:opacity-95',
                     orientation === 'horizontal'
                         ? 'right-1 top-1/2 -translate-y-1/2'
                         : 'bottom-1 left-1/2 -translate-x-1/2 rotate-90',
@@ -218,7 +214,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
             >
                 <ArrowRight className="h-4 w-4" />
                 <span className="sr-only">Next slide</span>
-            </Button>
+            </button>
         );
     },
 );

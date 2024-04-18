@@ -1,5 +1,8 @@
+'use client';
 import { Button } from '@/components/ui/button';
+import useAuthStore from '@/hooks/use-auth-store';
 import { ShoppingBasket } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 const OrderSuccessPage = () => {
@@ -21,8 +24,12 @@ const OrderSuccessPage = () => {
                             Get in touch with us if you have any <br /> questions or concerns.
                         </p>
                         <div className="flex justify-around">
-                            <Button variant="outline">Go back to shopping</Button>
-                            <Button variant="primary">Track order</Button>
+                            <Button variant="outline">
+                                <Link href="/">Go back to shopping</Link>
+                            </Button>
+                            <Button variant="primary">
+                                <Link href={`/order/check-order`}>Track order</Link>
+                            </Button>
                         </div>
                     </div>
                 </div>

@@ -17,9 +17,11 @@ import { useRouter } from 'next/navigation';
 import { UserLoginType } from '@/type';
 import useAuthStore from '@/hooks/use-auth-store';
 import { useModalStore } from '@/hooks/use-modal-store';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const schema = z.object({
-    phone_number: z
+    phoneNumber: z
         .string()
         .refine((value) => /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(value), 'Phone number is not valid'),
     password: z.string().min(8),
@@ -31,7 +33,7 @@ const Page = () => {
     const { onOpen } = useModalStore();
     const form = useForm<z.infer<typeof schema>>({
         defaultValues: {
-            phone_number: '0327427732',
+            phoneNumber: '0327427732',
             password: 'Azqc2003',
         },
         resolver: zodResolver(schema),
@@ -55,39 +57,54 @@ const Page = () => {
     };
 
     return (
-        <div className="md:w-[70vw] w-[90vw] h-[60vh] md:h-[80vh] rounded-lg bg-white shadow-md flex flex-col">
-            <div className="flex flex-1 items-center">
-                <div className="flex-1 hidden md:block">
-                    <h2 className="text-center text-4xl space-x-0 leading-tight tracking-tighter ">Welcome To CShop</h2>
-                    <article className="text-center font-thin">Pioneering the modern shopping experience</article>
-                    <Image src={loginImageSrc} alt="Login image" />
-                </div>
-                <div className="flex-1 flex flex-col px-4 md:px-10 h-full justify-center ">
-                    <h2 className="text-center font-bold text-3xl tracking-tight mb-10">Member Login</h2>
+        <div className="w-full h-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+            <div className="flex items-center justify-center py-12">
+                <div className="mx-auto grid w-[350px] gap-6">
+                    <div className="grid gap-2 text-center">
+                        <h1 className="text-3xl font-bold">Login</h1>
+                        <p className="text-balance text-muted-foreground">
+                            Enter your email below to login to your account
+                        </p>
+                    </div>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
-                            <InputField
-                                control={form.control}
-                                name="phone_number"
-                                label="Phone number"
-                                icon={<User size={20} className="text-zinc-600" />}
-                                type="text"
-                            />
-                            <InputField control={form.control} name="password" label="Password" type="password" />
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2">
+                            <div className="grid gap-4">
+                                <InputField
+                                    control={form.control}
+                                    name="phone_number"
+                                    label="Phone number"
+                                    icon={<User size={20} className="text-zinc-600" />}
+                                    type="text"
+                                />
 
-                            <Button type="submit" variant="secondary">
-                                Login
-                            </Button>
+                                <InputField control={form.control} name="password" label="Password" type="password" />
+                                <Button type="submit" className="w-full">
+                                    Login
+                                </Button>
+                                <Button variant="outline" className="w-full">
+                                    Login with Google
+                                </Button>
+                            </div>
                         </form>
                     </Form>
+
+                    <div className="mt-4 text-center text-sm">
+                        Don&apos;t have an account?{' '}
+                        <Link href="#" className="underline">
+                            Sign up
+                        </Link>
+                    </div>
                 </div>
             </div>
-            <Link href="/sign-up" className="flex w-full justify-end p-2">
-                <Button className=" flex gap-2 md:w-1/2 w-full group" variant="link">
-                    Create your account <MoveRight className="text-zinc-600" />
-                </Button>
-            </Link>
-            <CursorProvider />
+            <div className="hidden bg-muted lg:block">
+                <Image
+                    src="/banner.png"
+                    alt="Image"
+                    width="1920"
+                    height="1080"
+                    className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+                />
+            </div>
         </div>
     );
 };

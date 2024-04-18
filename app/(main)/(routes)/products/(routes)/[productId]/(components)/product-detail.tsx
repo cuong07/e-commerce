@@ -1,14 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useEffect, useState } from 'react';
-import { StaticImageData } from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { CheckCheck, Heart, Minus, Plus, ShoppingCart, Star } from 'lucide-react';
+import { Check, Heart, Minus, Plus, ShoppingCart, Star } from 'lucide-react';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { useModalStore } from '@/hooks/use-modal-store';
 import Breadcrumbs from '@/components/sreadcrumbs';
-import { Button } from '@/components/ui/button';
 import { CartDetailDTO, ProductData, ProductImage, ReviewData } from '@/type';
+import { motion } from 'framer-motion';
 
 import { getProducts } from '@/lib/api/products';
 import { CardProduct } from '@/components/card/card-product';
@@ -115,8 +114,8 @@ export const ProductDetail = ({ product, productId }: { product: ProductData; pr
                 setCartDetail(response);
                 toast({
                     description: (
-                        <span className="flex">
-                            Successfully <CheckCheck />
+                        <span className="flex gap-2 justify-center items-center w-full">
+                            Successfully <Check size={28} />
                         </span>
                     ),
                     variant: 'success',
@@ -235,14 +234,16 @@ export const ProductDetail = ({ product, productId }: { product: ProductData; pr
                             <div className="p-3 border rounded-full">
                                 <Heart size={28} className="text-zinc-500" />
                             </div>
-                            <Button
-                                variant="outline"
+                            <motion.button
+                                whileHover={{
+                                    scale: 1.05,
+                                }}
                                 className="flex-1 py-3 bg-[#5a4199] hover:bg-[#5a419990] text-zinc-200 h-14 border rounded-full flex items-center justify-center gap-4 cursor-pointer"
                                 onClick={handleAddToCart}
                             >
                                 <ShoppingCart size={26} />
                                 <span className="font-semibold text-lg">Add to Cart</span>
-                            </Button>
+                            </motion.button>
                         </div>
                     </div>
                     <article className="">
@@ -256,7 +257,7 @@ export const ProductDetail = ({ product, productId }: { product: ProductData; pr
             <hr className="border-t border-gray-300 my-20" />
             <div className="">
                 <h2 className="font-bold text-3xl mb-20">{`Customer reviews(${reviews.length})`}</h2>
-                {reviews?.length === 0 && <h1 className="text-lg font-semibold text-center">No reviews found</h1>}
+                {reviews?.length === 0 && <h1 className="text-2xl font-semibold text-center">No reviews found</h1>}
                 <div className="flex  flex-col-reverse lg:flex-row">
                     <div className="lg:w-3/5 w-full grid grid-cols-1 md:grid-cols-2">
                         {reviews?.map((item) => <ReviewItem review={item} key={item.id} />)}

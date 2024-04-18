@@ -35,6 +35,8 @@ const nextConfig = {
             'www.mungbaobao.com',
             'cdn.pixabay.com',
             'vn.louisvuitton.com',
+            'fl-1.cdn.flockler.com',
+            'c4.wallpaperflare.com',
         ],
     },
 };

@@ -64,6 +64,8 @@ export const getAllOrders = async () => {
     const url = qs.stringifyUrl({
         url: OrderV1.GET_ALL_ORDER_BY_USER,
     });
+    await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+
     try {
         const response = await requsetInstance.get(url);
         return response.data;

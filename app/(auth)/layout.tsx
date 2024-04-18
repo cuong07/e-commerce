@@ -1,11 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <main className="flex h-full items-center justify-center bg-gradient-login">
-      {children}
-    </main>
-  );
+    return <main className="flex h-full items-center justify-center ">{children}</main>;
 };
 
 export default layout;
