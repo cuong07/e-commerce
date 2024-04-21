@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MoveRight, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,16 +9,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/components/ui/form';
 
 import { Button } from '@/components/ui/button';
-import loginImageSrc from '@/assets/undraw_Login_re_4vu2.png';
 import { InputField } from '@/components/input/input-field';
-import CursorProvider from '@/components/providers/cursor-provider';
 import { signin } from '@/lib/api/auth';
 import { useRouter } from 'next/navigation';
-import { UserLoginType } from '@/type';
 import useAuthStore from '@/hooks/use-auth-store';
 import { useModalStore } from '@/hooks/use-modal-store';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
 const schema = z.object({
     phoneNumber: z

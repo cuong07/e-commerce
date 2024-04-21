@@ -30,7 +30,7 @@ export const AlertLogin = () => {
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction>
-                        <Link href={data.link} onClick={onClose}>
+                        <Link href={data.link ?? ''} onClick={onClose}>
                             Login
                         </Link>
                     </AlertDialogAction>

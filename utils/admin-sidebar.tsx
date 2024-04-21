@@ -1,34 +1,136 @@
 import { BaggageClaim, DollarSign, LayoutDashboard, ShoppingCart, TrendingUp, Users } from 'lucide-react';
 
-export const AdminSidebar = [
+export const adminSidebar = [
     {
         name: 'Dashboard',
-        icon: <LayoutDashboard />,
+        icon: <LayoutDashboard size={20} />,
         link: '',
+        sub: [
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+        ],
     },
     {
         name: 'Statistics',
-        icon: <TrendingUp />,
+        icon: <TrendingUp size={20} />,
         link: 'statistic',
+        sub: [
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+        ],
     },
     {
         name: 'Payment',
-        icon: <DollarSign />,
+        icon: <DollarSign size={20} />,
         link: 'payment',
+        sub: [
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+        ],
     },
     {
         name: 'Product',
-        icon: <BaggageClaim />,
+        icon: <BaggageClaim size={20} />,
         link: 'product',
+        sub: [
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+        ],
     },
     {
         name: 'Order',
-        icon: <ShoppingCart />,
+        icon: <ShoppingCart size={20} />,
         link: 'order',
+        sub: [
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+        ],
     },
     {
         name: 'User',
-        icon: <Users />,
+        icon: <Users size={20} />,
         link: 'user',
+        sub: [
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+            {
+                name: 'Dashboard',
+                icon: <LayoutDashboard size={18} />,
+                link: '',
+            },
+        ],
     },
 ];

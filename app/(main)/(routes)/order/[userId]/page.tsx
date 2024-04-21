@@ -43,7 +43,7 @@ const OrderPage = () => {
                             </div>
                             <div className="flex gap-2">
                                 <div className="font-semibold">Order date:</div>
-                                <h2>{order.orderDate}</h2>
+                                <h2>{order.orderDate.toString()}</h2>
                             </div>
                             <div className="flex gap-2">
                                 <div className="font-semibold">Address:</div>
