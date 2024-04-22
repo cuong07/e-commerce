@@ -50,7 +50,7 @@ export const SidebarItem = ({ icon, link, name, sub, itemIndex }: SidebarItemPro
                             key={index}
                         >
                             <Link
-                                href={item.link}
+                                href={`/admin/${item.link}`}
                                 className="flex gap-2 items-center px-6 py-2 text-xs hover:bg-black cursor-pointer hover:text-white"
                             >
                                 <span>{item.icon}</span>
