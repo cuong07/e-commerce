@@ -22,7 +22,8 @@ export const SidebarItem = ({ icon, link, name, sub, itemIndex }: SidebarItemPro
                     <span className="text-md">{name}</span>
                 </div>
             </CollapsibleTrigger>
-            <CollapsibleContent>
+
+            <CollapsibleContent className="bg-zinc-50">
                 <motion.div
                     variants={{
                         hidden: { opacity: 1, scale: 0 },
