@@ -1,7 +1,7 @@
 import qs from 'query-string';
 
 import { OrderV1 } from '@/constant/endpoint';
-import requsetInstance from '@/interceptors/token-interceptor';
+import requestInstance from '@/interceptors/token-interceptor';
 import { OrderDTO } from '@/type';
 
 export const getPaymentNVPay = async (amount: number, orderInfo: string) => {
@@ -13,7 +13,7 @@ export const getPaymentNVPay = async (amount: number, orderInfo: string) => {
         },
     });
     try {
-        const response = await requsetInstance.get(url);
+        const response = await requestInstance.get(url);
         return response.data;
     } catch (error) {
         console.log('GET_ORDER_PAYMENT_NVPAY_ERROR:', error);
@@ -26,7 +26,7 @@ export const createOrderWithPayment = async (data: OrderDTO) => {
         url: OrderV1.CREATE_ORDER_PAYMENT_NVPAY,
     });
     try {
-        const response = await requsetInstance.post(url, data);
+        const response = await requestInstance.post(url, data);
         return response;
     } catch (error) {
         console.log('CREATE_ORDER_PAYMENT_NVPAY_ERROR:', error);
@@ -39,7 +39,7 @@ export const createOrderCOD = async (data: OrderDTO) => {
         url: OrderV1.CREATE_ORDER_COD,
     });
     try {
-        const response = await requsetInstance.post(url, data);
+        const response = await requestInstance.post(url, data);
         return response;
     } catch (error) {
         console.log('CREATE_ORDER_COD:', error);
@@ -52,7 +52,7 @@ export const getPaymentStatus = async () => {
         url: OrderV1.GET_PAYMENT_VNPAY_STATUS,
     });
     try {
-        const response = await requsetInstance.get(url);
+        const response = await requestInstance.get(url);
         return response.data;
     } catch (error) {
         console.log('GET_PAYMENT_VNPAY_STATUS_ERROR:', error);
@@ -67,7 +67,7 @@ export const getAllOrders = async () => {
     await new Promise((resolve, reject) => setTimeout(resolve, 2000));
 
     try {
-        const response = await requsetInstance.get(url);
+        const response = await requestInstance.get(url);
         return response.data;
     } catch (error) {
         console.log('GET_PAYMENT_VNPAY_STATUS_ERROR:', error);

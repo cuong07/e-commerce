@@ -32,6 +32,13 @@ export type ProductData = {
     productImages: ProductImage[];
 };
 
+export type ProductDTO = {
+    name: string;
+    price: number;
+    description: string;
+    category_id: number;
+};
+
 export type ProductImage = {
     id: number;
     imageUrl: string;
