@@ -57,13 +57,13 @@ const useProductStore = create<ProductStore>((set) => ({
 
             // If it's the first page (page === 0), don't append to the existing array
             if (state.pagination.page === 0) {
-                updatedProductsData = data.products.map((product) => ({
+                updatedProductsData = data.products?.map((product) => ({
                     ...product,
                     url: process.env.NEXT_PUBLIC_BASE_URL + product.thumbnail,
                 }));
             } else {
                 // If it's not the first page, append to the existing array
-                const newProducts = data.products.map((product) => ({
+                const newProducts = data.products?.map((product) => ({
                     ...product,
                     url: process.env.NEXT_PUBLIC_BASE_URL + product.thumbnail,
                 }));
@@ -80,16 +80,17 @@ const useProductStore = create<ProductStore>((set) => ({
     getListProductsSearch: (data: ProductsResponse) =>
         set((state: ProductStore) => {
             let updatedProductsData = [];
+            console.log(data);
 
             // If it's the first page (page === 0), don't append to the existing array
             if (state.pagination.page === 0) {
-                updatedProductsData = data.products.map((product) => ({
+                updatedProductsData = data.products?.map((product) => ({
                     ...product,
                     url: process.env.NEXT_PUBLIC_BASE_URL + product.thumbnail,
                 }));
             } else {
                 // If it's not the first page, append to the existing array
-                const newProducts = data.products.map((product) => ({
+                const newProducts = data.products?.map((product) => ({
                     ...product,
                     url: process.env.NEXT_PUBLIC_BASE_URL + product.thumbnail,
                 }));

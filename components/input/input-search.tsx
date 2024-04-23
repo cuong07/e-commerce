@@ -33,7 +33,7 @@ export const InputSearch = ({ handleSearch }: IInputSearchProps) => {
                         limit: 10,
                         keyword: value,
                     });
-                    setResults(response.data.products);
+                    setResults(response.data?.data?.products);
                 } catch (error) {
                     console.error('Error fetching search results:', error);
                 }
