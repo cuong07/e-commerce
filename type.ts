@@ -21,7 +21,7 @@ export type UserRegisterType = {
     phone_number: string;
 };
 
-export type ProductData = {
+export interface ProductData extends BaseData {
     id: number;
     name: string;
     price: number;
@@ -30,13 +30,13 @@ export type ProductData = {
     categoryId: number;
     url: string;
     productImages: ProductImage[];
-};
+}
 
 export type ProductDTO = {
     name: string;
-    price: number;
+    price: string;
     description: string;
-    category_id: number;
+    category_id: string;
 };
 
 export type ProductImage = {

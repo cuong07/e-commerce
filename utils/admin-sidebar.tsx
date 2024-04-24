@@ -80,7 +80,7 @@ export const adminSidebar = [
             {
                 name: 'Listings',
                 icon: <ListIcon size={18} />,
-                link: '',
+                link: 'product/listings',
             },
             {
                 name: 'Dashboard',

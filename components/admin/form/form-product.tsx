@@ -4,9 +4,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import React from 'react';
+import React, { useState } from 'react';
 import ImageUpload from '../image/image-upload';
-import { CategoryData } from '@/type';
+import { CategoryData, ProductDTO } from '@/type';
 import { Button } from '@/components/ui/button';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +14,8 @@ import * as z from 'zod';
 import { InputField } from '@/components/input/input-field';
 import { InputArea } from '@/components/input/input-area';
 import { SelectField } from '@/components/select/select-field';
+import { createProduct, updateProductImage } from '@/lib/api/products';
+import { useToast } from '@/hooks/use-toast';
 
 interface FormProducProps {
     categories: CategoryData[];
@@ -27,6 +29,9 @@ const schema = z.object({
 });
 
 export const FormProduct = ({ categories }: FormProducProps) => {
+    const [files, setFiles] = useState<any>([]);
+    const { toast } = useToast();
+
     const form = useForm<z.infer<typeof schema>>({
         defaultValues: {
             name: '',
@@ -38,12 +43,33 @@ export const FormProduct = ({ categories }: FormProducProps) => {
         mode: 'all',
     });
 
-    const onSubmit = (value: z.infer<typeof schema>) => {
-        const newValue = {
+    const onSubmit = async (value: z.infer<typeof schema>) => {
+        const newValue: ProductDTO = {
             ...value,
             category_id: categories.filter((item) => item.name === value.category_id)[0].id,
         };
-        console.log(newValue);
+        try {
+            if (files.length > 0) {
+                const newProduct = await createProduct(newValue);
+                const updateImage = await updateProductImage(newProduct.id, files);
+                console.log(updateImage);
+                toast({
+                    description: <span className="flex">Create product successfully!</span>,
+                    variant: 'success',
+                });
+                return;
+            } else {
+                return toast({
+                    description: <span className="flex">You must add photos to the product</span>,
+                    variant: 'destructive',
+                });
+            }
+        } catch (error) {
+            toast({
+                description: <span className="flex">error</span>,
+                variant: 'destructive',
+            });
+        }
     };
 
     return (
@@ -52,7 +78,7 @@ export const FormProduct = ({ categories }: FormProducProps) => {
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="flex justify-end gap-4 mb-4">
                         <Button variant="outline">Discard</Button>
-                        <Button variant="submit" type="submit">
+                        <Button variant="submit" type="submit" disabled={form.formState.isSubmitting}>
                             Save Product
                         </Button>
                     </div>
@@ -125,8 +151,7 @@ export const FormProduct = ({ categories }: FormProducProps) => {
                                     </div>
                                 </CardContent>
                             </Card>
-                            <ImageUpload />
-                            <ImageUpload />
+                            <ImageUpload setFiles={setFiles} files={files} />
                         </div>
                     </div>
                 </form>

@@ -55,7 +55,7 @@ export const ProductDetail = ({ product, productId }: { product: ProductData; pr
                     page: 0,
                     categoryId: product.categoryId,
                 });
-                const result = response.data.products.map((product: ProductData) => ({
+                const result = response.data.data.products.map((product: ProductData) => ({
                     ...product,
                     url: process.env.NEXT_PUBLIC_BASE_URL + product.thumbnail,
                 }));
@@ -147,12 +147,16 @@ export const ProductDetail = ({ product, productId }: { product: ProductData; pr
                         {product.productImages.length > 0 &&
                             product.productImages.map((image: ProductImage) => (
                                 <SwiperSlide key={image.id} onClick={handleOpenImageModal}>
-                                    <img src={image.imageUrl} alt={product.name} className="object-cover w-full" />
+                                    <img
+                                        src={image.imageUrl}
+                                        alt={product.name}
+                                        className="aspect-square object-cover w-full"
+                                    />
                                 </SwiperSlide>
                             ))}
                         {product.productImages.length === 0 && (
                             <SwiperSlide>
-                                <img src={myImage} alt="not found" className="object-cover w-full" />
+                                <img src={myImage} alt="not found" className=" aspect-square object-cover w-full" />
                             </SwiperSlide>
                         )}
                     </Swiper>
@@ -172,14 +176,14 @@ export const ProductDetail = ({ product, productId }: { product: ProductData; pr
                                     <img
                                         src={image.imageUrl}
                                         alt={product.name}
-                                        className="object-cover w-full h-full"
+                                        className=" aspect-square object-cover w-full h-full"
                                     />
                                 </SwiperSlide>
                             ))}
                         {product.productImages.length === 0 &&
                             new Array(4).fill(0).map((_, index) => (
                                 <SwiperSlide key={index}>
-                                    <img src={myImage} alt="not found" className="object-cover w-full" />
+                                    <img src={myImage} alt="not found" className=" aspect-square object-cover w-full" />
                                 </SwiperSlide>
                             ))}
                     </Swiper>

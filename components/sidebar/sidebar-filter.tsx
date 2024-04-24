@@ -112,7 +112,7 @@ async function getCategories({ page, limit }: QueryString) {
 }
 
 const MIN_PRICE = 0;
-const MAX_PRICE = 200;
+const MAX_PRICE = 999;
 
 export const SidebarFilter = () => {
     const [categories, setCategories] = useState<CategoryData[]>([]);
