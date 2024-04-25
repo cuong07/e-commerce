@@ -46,7 +46,7 @@ export const ImageModal = () => {
                                 <Image
                                     src={image.imageUrl}
                                     alt={image.imageUrl}
-                                    className="object-cover w-full"
+                                    className="w-full object-contain aspect-video"
                                     fill
                                     sizes="100vw"
                                 />

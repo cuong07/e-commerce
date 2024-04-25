@@ -1,6 +1,8 @@
 import { productV1 } from '@/constant/endpoint';
 import { request } from '@/lib/axios';
+import { ProductDTO, ProductData } from '@/type';
 import qs from 'query-string';
+import requestInstance from '@/interceptors/token-interceptor';
 
 type QueryString = {
     page: number;
@@ -41,6 +43,42 @@ export const getDetailProduct = async (productId: string) => {
         const response = await request(url);
         return response;
     } catch (error: any) {
+        throw error;
+    }
+};
+
+export const createProduct = async (data: ProductDTO) => {
+    const url = qs.stringifyUrl({
+        url: productV1.CREATE_PRODUCT,
+    });
+    try {
+        const response = await requestInstance.post(url, data);
+        return response.data as ProductData;
+    } catch (error) {
+        console.log('CREATE_PRODUCT:', error);
+        throw error;
+    }
+};
+
+export const updateProductImage = async (productId: number, files: FileList | File[]) => {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+    }
+
+    const url = qs.stringifyUrl({
+        url: productV1.PRODUCT_UPLOAD_IMAGES,
+    });
+
+    try {
+        const response = await requestInstance.post(url + productId, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response;
+    } catch (error) {
+        console.log('UPDATE_PRODUCT_IMAGE:', error);
         throw error;
     }
 };

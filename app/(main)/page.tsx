@@ -54,8 +54,6 @@ const Page = () => {
 
     const routes = useRouter();
 
-    const onScreen = useOnScreen(ref);
-
     useEffectOneCall(() => {
         (async () => {
             const response = await getCategories({ page: 0, limit: 6 });
@@ -63,7 +61,7 @@ const Page = () => {
         })();
         (async () => {
             const response = await getProducts({ page: 0, limit: 18 });
-            setProducts(response?.data?.products);
+            setProducts(response?.data?.data?.products);
         })();
     });
 

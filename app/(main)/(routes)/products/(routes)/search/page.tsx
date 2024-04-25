@@ -31,7 +31,7 @@ const SearchPage = () => {
             const { maxPrice, minPrice } = price;
             try {
                 const response = await getProducts({ page: 0, limit: 48, keyword, categoryId, minPrice, maxPrice });
-                getListProductsSearch(response?.data);
+                getListProductsSearch(response?.data?.data);
                 setFetching(false);
             } catch (error: any) {
                 setFetching(false);

@@ -13,6 +13,8 @@ export const userAddressV1 = {
 export const productV1 = {
     GET_PRODUCTS: '/products',
     GET_DETAILS_PRODUCT: '/products/',
+    CREATE_PRODUCT: '/products',
+    PRODUCT_UPLOAD_IMAGES: '/products/uploads/',
 };
 
 export const categoryV1 = {

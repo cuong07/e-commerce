@@ -22,7 +22,7 @@ const ProductsPage = () => {
             try {
                 const { page, limit } = pagination;
                 const response = await getProducts({ page, limit });
-                getListProduct(response?.data);
+                getListProduct(response?.data?.data);
                 setFetching(false);
             } catch (error: any) {
                 setFetching(false);
