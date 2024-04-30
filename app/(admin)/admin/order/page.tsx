@@ -5,7 +5,7 @@ import { Menubar, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useModalStore } from '@/hooks/use-modal-store';
-import { getOrders } from '@/lib/api/order';
+import { getOrders, updateOrderStatus } from '@/lib/api/order';
 import { formatCurency } from '@/lib/utils';
 import { OrderData, OrderStatus } from '@/type';
 import moment from 'moment';
@@ -28,6 +28,12 @@ const OrderPage = () => {
         setStatusActive(status);
     };
 
+    const handleUpdateStatus = async (id: number, status: OrderStatus) => {
+        const res = await updateOrderStatus(id, status);
+        setStatusActive(status);
+        console.log(res);
+    };
+
     const handleOpenModal = (order: OrderData) => {
         onOpen('order-detail', { order });
     };
@@ -41,7 +47,7 @@ const OrderPage = () => {
 
     return (
         <div className="container">
-            <Menubar className="w-fit" defaultValue={OrderStatus.PENDING}>
+            <Menubar className="w-fit" defaultValue={statusActive}>
                 {status.map((item) => (
                     <MenubarMenu key={item} value={item}>
                         <MenubarTrigger onClick={() => handleChangeStatus(item)} className="cursor-pointer">
@@ -74,7 +80,7 @@ const OrderPage = () => {
                                 <TableCell>{moment(item.orderDate).format('LL')}</TableCell>
                                 <TableCell>{formatCurency(item.totalMoney)}</TableCell>
                                 <TableCell className="w-[160px]">
-                                    <Select>
+                                    <Select onValueChange={(value: OrderStatus) => handleUpdateStatus(item.id, value)}>
                                         <SelectTrigger id="subcategory" aria-label={item.status}>
                                             <SelectValue placeholder={item.status} />
                                         </SelectTrigger>
@@ -89,7 +95,7 @@ const OrderPage = () => {
                                 </TableCell>
                                 <TableCell>
                                     <Button variant="link" onClick={() => handleOpenModal(item)}>
-                                        Show more
+                                        Show detail
                                     </Button>
                                 </TableCell>
                             </TableRow>

@@ -92,3 +92,19 @@ export const getOrders = async ({ page, limit, status }: { page: number; limit: 
         throw error;
     }
 };
+
+export const updateOrderStatus = async (id: number, status: OrderStatus) => {
+    const url = qs.stringifyUrl({
+        url: OrderV1.UPDATE_ORDER_STATUS_BY_ID + id,
+        query: {
+            status,
+        },
+    });
+    try {
+        const response = await requestInstance.put(url);
+        return response.data;
+    } catch (error) {
+        console.log('UPDATE_ORDER_STATUS_BY_ID:', error);
+        throw error;
+    }
+};
