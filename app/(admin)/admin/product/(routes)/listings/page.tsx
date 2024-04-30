@@ -18,22 +18,56 @@ import { getProducts } from '@/lib/api/products';
 import { ProductData } from '@/type';
 import { useModalStore } from '@/hooks/use-modal-store';
 import { useRouter } from 'next/navigation';
-import useProductStore from '@/hooks/use-product-store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { formatCurency } from '@/lib/utils';
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from '@/components/ui/pagination';
 
 export default function ProductListingPage() {
     const router = useRouter();
-    const { pagination, productsData, totalPage, isLoading, nextPage, setFetching, getListProduct } = useProductStore();
+    const [isFetching, setFetching] = useState<boolean>(false);
+    const [products, setPrducts] = useState<ProductData[]>([]);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [numberPage, setNumberPage] = useState<number>(3);
+    const [pagination, setPagination] = useState<{ page: number; limit: number }>({
+        page: 0,
+        limit: 10,
+    });
     const { onOpen } = useModalStore();
+
+    const handleNextPage = (number: number) => {
+        setPagination((prev) => ({
+            ...prev,
+            page: prev.page + number,
+        }));
+    };
+
+    const handleGoToPage = (number: number) => {
+        setPagination((prev) => ({
+            ...prev,
+            page: number,
+        }));
+    };
+
+    const handleSetNumberPage = () => {
+        setNumberPage(totalPages - 1);
+    };
 
     useEffect(() => {
         (async () => {
             try {
                 const { page, limit } = pagination;
                 const response = await getProducts({ page, limit });
-                getListProduct(response?.data?.data);
+                setPrducts(response?.data?.data.products);
+                setTotalPages(response?.data?.data?.totalPages);
                 setFetching(false);
             } catch (error: any) {
                 setFetching(false);
@@ -53,6 +87,8 @@ export default function ProductListingPage() {
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pagination]);
+    console.log(totalPages - 1, pagination.page);
+
     return (
         <Card>
             <CardHeader>
@@ -77,7 +113,7 @@ export default function ProductListingPage() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {productsData?.map((product) => (
+                        {products?.map((product) => (
                             <TableRow key={product.id}>
                                 <TableCell className="hidden sm:table-cell">
                                     <Image
@@ -118,9 +154,32 @@ export default function ProductListingPage() {
                 </Table>
             </CardContent>
             <CardFooter>
-                <div className="text-xs text-muted-foreground">
-                    Showing <strong>1-10</strong> of <strong>32</strong> products
-                </div>
+                <Pagination>
+                    <PaginationContent>
+                        <PaginationItem aria-disabled={true}>
+                            <PaginationPrevious
+                                onClick={() => handleNextPage(-1)}
+                                disabled={pagination.page === 0}
+                                href="#"
+                            />
+                        </PaginationItem>
+                        {new Array(5).fill(0).map((_, index) => (
+                            <PaginationItem key={index} onClick={() => handleGoToPage(index + 1)}>
+                                <PaginationLink isActive={pagination.page === index + 1}>{index}</PaginationLink>
+                            </PaginationItem>
+                        ))}
+                        <PaginationItem>
+                            <PaginationEllipsis />
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationNext
+                                href="#"
+                                onClick={() => handleNextPage(1)}
+                                disabled={pagination.page === totalPages - 1}
+                            />
+                        </PaginationItem>
+                    </PaginationContent>
+                </Pagination>
             </CardFooter>
         </Card>
     );
