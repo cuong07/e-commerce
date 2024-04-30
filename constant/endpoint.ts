@@ -38,6 +38,7 @@ export const OrderV1 = {
     CREATE_ORDER_PAYMENT_NVPAY: '/payments/nvpay-payment/order-success',
     CREATE_ORDER_COD: '/orders/cod',
     GET_ALL_ORDER_BY_USER: '/orders/user/all',
+    GET_ORDERS: '/orders',
 };
 
 export const ReviewV1 = {

@@ -2,7 +2,7 @@ import qs from 'query-string';
 
 import { OrderV1 } from '@/constant/endpoint';
 import requestInstance from '@/interceptors/token-interceptor';
-import { OrderDTO } from '@/type';
+import { OrderDTO, OrderStatus } from '@/type';
 
 export const getPaymentNVPay = async (amount: number, orderInfo: string) => {
     const url = qs.stringifyUrl({
@@ -70,7 +70,25 @@ export const getAllOrders = async () => {
         const response = await requestInstance.get(url);
         return response.data;
     } catch (error) {
-        console.log('GET_PAYMENT_VNPAY_STATUS_ERROR:', error);
+        console.log('GET_ALL_ORDER_BY_USER:', error);
+        throw error;
+    }
+};
+
+export const getOrders = async ({ page, limit, status }: { page: number; limit: number; status?: OrderStatus }) => {
+    const url = qs.stringifyUrl({
+        url: OrderV1.GET_ORDERS,
+        query: {
+            limit,
+            page,
+            status,
+        },
+    });
+    try {
+        const response = await requestInstance.get(url);
+        return response.data;
+    } catch (error) {
+        console.log('GET_ORDERS:', error);
         throw error;
     }
 };

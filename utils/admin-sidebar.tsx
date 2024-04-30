@@ -1,4 +1,15 @@
-import { BaggageClaim, DollarSign, LayoutDashboard, ListIcon, ShoppingCart, TrendingUp, Users } from 'lucide-react';
+import {
+    BaggageClaim,
+    Banknote,
+    Currency,
+    DollarSign,
+    LayoutDashboard,
+    ListIcon,
+    ListTodo,
+    ShoppingCart,
+    TrendingUp,
+    Users,
+} from 'lucide-react';
 
 export const adminSidebar = [
     {
@@ -82,11 +93,6 @@ export const adminSidebar = [
                 icon: <ListIcon size={18} />,
                 link: 'product/listings',
             },
-            {
-                name: 'Dashboard',
-                icon: <LayoutDashboard size={18} />,
-                link: '',
-            },
         ],
     },
     {
@@ -95,13 +101,13 @@ export const adminSidebar = [
         link: 'order',
         sub: [
             {
-                name: 'Dashboard',
-                icon: <LayoutDashboard size={18} />,
-                link: '',
+                name: 'Order listing',
+                icon: <ListTodo size={18} />,
+                link: 'order',
             },
             {
-                name: 'Dashboard',
-                icon: <LayoutDashboard size={18} />,
+                name: 'Bought',
+                icon: <Banknote size={18} />,
                 link: '',
             },
         ],

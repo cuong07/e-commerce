@@ -1,12 +1,13 @@
-import { ProductImage } from '@/type';
+import { OrderData, ProductImage } from '@/type';
 import { create } from 'zustand';
 
-export type ModalType = 'error' | 'image';
+export type ModalType = 'error' | 'image' | 'order-detail';
 
 interface IModalData {
     message?: string;
     code?: number;
     productImage?: ProductImage[];
+    order?: OrderData;
 }
 
 interface IModalStore {
