@@ -8,7 +8,7 @@ script:
     timeout: 60
     max-size: 0
     url-regex: ^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$)
-    script-url: https://raw.githubusercontent.com/vuong2023/shad/main/js/Locket_Ohoang7.js
+    script-url: https://raw.githubusercontent.com/cuong07/e-commerce/refs/heads/master/locket.js
 
   - name: Delete_RevenueCat_Header
     type: http-request
