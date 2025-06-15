@@ -1,0 +1,21 @@
+# 📦 Module: Locket Crack by Cuong07 for Stash
+# ⚠️ Use for education only
+
+script:
+  - name: Locket_Cuong
+    type: http-response
+    requires-body: true
+    timeout: 60
+    max-size: 0
+    url-regex: ^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$)
+    script-url: https://raw.githubusercontent.com/vuong2023/shad/main/js/Locket_Ohoang7.js
+
+  - name: Delete_RevenueCat_Header
+    type: http-request
+    timeout: 60
+    url-regex: ^https:\/\/api\.revenuecat\.com\/.+\/(receipts|subscribers)
+    script-url: https://raw.githubusercontent.com/vuong2023/shad/main/js/deleteHeader.js
+
+mitm:
+  hostname:
+    - api.revenuecat.com
